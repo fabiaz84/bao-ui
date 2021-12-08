@@ -207,12 +207,10 @@ const MarketListItem: React.FC<MarketListItemProps> = ({
 						<Col>{market.borrowApy.toFixed(2)}%</Col>
 						<Col>
 							{' '}
-							{isInMarket && (
-								<>
-									{' '}
-									<StyledCheck checked inline />
-								</>
-							)}
+							<>
+								{' '}
+								<StyledCheck checked={isInMarket} inline />{' '}
+							</>
 						</Col>
 						<Col>
 							{`$${getDisplayBalance(
