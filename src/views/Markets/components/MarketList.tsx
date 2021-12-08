@@ -293,7 +293,21 @@ const MarketListItem: React.FC<MarketListItemProps> = ({
 								label={null}
 								stats={[
 									{
-										label: 'Supplied',
+										label: 'Total Supplied',
+										value: `$${getDisplayBalance(
+											market.supplied *
+												decimate(
+													prices[market.token],
+													36 - market.decimals,
+												).toNumber(),
+											0,
+										)}`,
+										subvalue: `${market.supplied.toFixed(2)} ${
+											market.underlyingSymbol
+										}`,
+									},
+									{
+										label: 'Your Supplied',
 										value: `$${getDisplayBalance(
 											suppliedUnderlying *
 												decimate(
@@ -302,7 +316,7 @@ const MarketListItem: React.FC<MarketListItemProps> = ({
 												).toNumber(),
 											0,
 										)}`,
-										subvalue: `${suppliedUnderlying.toFixed(4)} ${
+										subvalue: `${suppliedUnderlying.toFixed(2)} ${
 											market.underlyingSymbol
 										}`,
 									},
@@ -314,18 +328,9 @@ const MarketListItem: React.FC<MarketListItemProps> = ({
 										label: 'Wallet Balance',
 										value: `${accountBalances
 											.find((balance) => balance.address === market.underlying)
-											.balance.toFixed(4)} ${market.underlyingSymbol}`,
+											.balance.toFixed(2)} ${market.underlyingSymbol}`,
 									},
 								]}
-							/>
-							<br />
-							<SubmitButton onClick={() => setShowSupplyModal(true)}>
-								Supply / Withdraw
-							</SubmitButton>
-							<MarketSupplyModal
-								asset={market}
-								show={showSupplyModal}
-								onHide={() => setShowSupplyModal(false)}
 							/>
 						</Col>
 						<Col>
@@ -340,7 +345,21 @@ const MarketListItem: React.FC<MarketListItemProps> = ({
 								label={null}
 								stats={[
 									{
-										label: 'Borrowed',
+										label: 'Total Borrowed',
+										value: `$${getDisplayBalance(
+											market.totalBorrows *
+												decimate(
+													prices[market.token],
+													36 - market.decimals,
+												).toNumber(),
+											0,
+										)}`,
+										subvalue: `${market.totalBorrows.toFixed(2)} ${
+											market.underlyingSymbol
+										}`,
+									},
+									{
+										label: 'Your Borrowed',
 										value: `$${getDisplayBalance(
 											borrowed *
 												decimate(
@@ -374,7 +393,21 @@ const MarketListItem: React.FC<MarketListItemProps> = ({
 									},
 								]}
 							/>
-							<br />
+						</Col>
+					</Row>
+					<br />
+					<Row>
+						<Col>
+							<SubmitButton onClick={() => setShowSupplyModal(true)}>
+								Supply / Withdraw
+							</SubmitButton>
+							<MarketSupplyModal
+								asset={market}
+								show={showSupplyModal}
+								onHide={() => setShowSupplyModal(false)}
+							/>
+						</Col>
+						<Col>
 							<SubmitButton onClick={() => setShowBorrowModal(true)}>
 								Borrow / Repay
 							</SubmitButton>
