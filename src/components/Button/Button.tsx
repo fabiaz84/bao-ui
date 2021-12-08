@@ -245,7 +245,6 @@ const NavButton = styled.button`
 	justify-content: center;
 	width: 100%;
 	padding: 0.5rem;
-	margin: 0.25rem;
 	font-weight: ${(props) => props.theme.fontWeight.strong};
 	font-size: ${(props) => props.theme.fontSize.default};
 	transition: 200ms;
@@ -274,5 +273,9 @@ const NavButton = styled.button`
 	&:active {
 		cursor: ${(props) =>
 			props.disabled ? 'not-allowed' : 'pointer'} !important;
+	}
+
+	&:first-child {
+		margin-right: 0.5rem;
 	}
 `

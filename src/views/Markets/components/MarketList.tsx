@@ -1,32 +1,32 @@
-import React, { useMemo, useState } from 'react'
 import BigNumber from 'bignumber.js'
+import React, { useMemo, useState } from 'react'
+import { Accordion, Col, Container, FormCheck, Row } from 'react-bootstrap'
 import styled from 'styled-components'
-import { useMarketPrices } from '../../../hooks/hard-synths/usePrices'
+import { useWallet } from 'use-wallet'
+import { TransactionReceipt } from 'web3-core'
+import { SupportedMarket } from '../../../bao/lib/types'
+import { getComptrollerContract } from '../../../bao/utils'
+import { SpinnerLoader } from '../../../components/Loader'
+import Tooltipped from '../../../components/Tooltipped'
+import {
+	AccountLiquidity,
+	useAccountLiquidity,
+} from '../../../hooks/hard-synths/useAccountLiquidity'
 import {
 	Balance,
 	useAccountBalances,
 	useBorrowBalances,
 	useSupplyBalances,
 } from '../../../hooks/hard-synths/useBalances'
-import {
-	AccountLiquidity,
-	useAccountLiquidity,
-} from '../../../hooks/hard-synths/useAccountLiquidity'
-import useTransactionProvider from '../../../hooks/useTransactionProvider'
-import useBao from '../../../hooks/useBao'
-import { useWallet } from 'use-wallet'
 import { useExchangeRates } from '../../../hooks/hard-synths/useExchangeRates'
 import { useAccountMarkets } from '../../../hooks/hard-synths/useMarkets'
-import { Accordion, Col, Container, FormCheck, Row } from 'react-bootstrap'
-import { SpinnerLoader } from '../../../components/Loader'
+import { useMarketPrices } from '../../../hooks/hard-synths/usePrices'
+import useBao from '../../../hooks/useBao'
+import useTransactionProvider from '../../../hooks/useTransactionProvider'
+import { decimate, getDisplayBalance } from '../../../utils/numberFormat'
+import { SubmitButton } from './MarketButton'
 import { MarketBorrowModal, MarketSupplyModal } from './Modals'
 import { MarketDetails, StatBlock } from './Stats'
-import Tooltipped from '../../../components/Tooltipped'
-import { SubmitButton } from './MarketButton'
-import { decimate, getDisplayBalance } from '../../../utils/numberFormat'
-import { getComptrollerContract } from '../../../bao/utils'
-import { SupportedMarket } from '../../../bao/lib/types'
-import { TransactionReceipt } from 'web3-core'
 
 export const MarketList: React.FC<MarketListProps> = ({
 	markets: _markets,
@@ -118,19 +118,22 @@ const MarketListHeader: React.FC = () => {
 		'Borrowed',
 		'Supply APY',
 		'Borrow APR',
-		'Total Supplied',
-		'Total Borrowed',
+		'Collateral',
+		'Liquidity',
 	]
 
 	return (
 		<Container fluid>
-		<Row lg={7} style={{ padding: '0.5rem 1.5rem' }}>
-			{headers.map((header: string) => (
-				<MarketListHeaderCol style={{ padding: '12px', paddingBottom: '0px' }} key={header}>
-					<b>{header}</b>
-				</MarketListHeaderCol>
-			))}
-		</Row>
+			<Row lg={7} style={{ padding: '0.5rem 1.5rem' }}>
+				{headers.map((header: string) => (
+					<MarketListHeaderCol
+						style={{ padding: '12px', paddingBottom: '0px' }}
+						key={header}
+					>
+						<b>{header}</b>
+					</MarketListHeaderCol>
+				))}
+			</Row>
 		</Container>
 	)
 }
@@ -189,12 +192,6 @@ const MarketListItem: React.FC<MarketListItemProps> = ({
 									).toNumber(),
 								0,
 							)}`}
-							{isInMarket && (
-								<>
-									{' '}
-									<StyledCheck checked inline />
-								</>
-							)}
 						</Col>
 						<Col>
 							{`$${getDisplayBalance(
@@ -209,22 +206,27 @@ const MarketListItem: React.FC<MarketListItemProps> = ({
 						<Col>{market.supplyApy.toFixed(2)}%</Col>
 						<Col>{market.borrowApy.toFixed(2)}%</Col>
 						<Col>
+							{' '}
+							{isInMarket && (
+								<>
+									{' '}
+									<StyledCheck checked inline />
+								</>
+							)}
+						</Col>
+						<Col>
 							{`$${getDisplayBalance(
 								market.supplied *
 									decimate(
 										prices[market.token],
 										36 - market.decimals,
-									).toNumber(),
+									).toNumber() -
+									market.totalBorrows *
+										decimate(
+											prices[market.token],
+											36 - market.decimals,
+										).toNumber(),
 								0,
-							)}`}
-						</Col>
-						<Col>
-							{`$${getDisplayBalance(
-								market.totalBorrows *
-									decimate(
-										prices[market.token],
-										36 - market.decimals,
-									).toNumber(),
 								0,
 							)}`}
 						</Col>
@@ -292,9 +294,7 @@ const MarketListItem: React.FC<MarketListItemProps> = ({
 								stats={[
 									{
 										label: 'Supplied',
-										value: `${suppliedUnderlying.toFixed(4)} ${
-											market.underlyingSymbol
-										} | $${getDisplayBalance(
+										value: `$${getDisplayBalance(
 											suppliedUnderlying *
 												decimate(
 													prices[market.token],
@@ -302,6 +302,13 @@ const MarketListItem: React.FC<MarketListItemProps> = ({
 												).toNumber(),
 											0,
 										)}`,
+										subvalue: `${suppliedUnderlying.toFixed(4)} ${
+											market.underlyingSymbol
+										}`,
+									},
+									{
+										label: 'Collateral',
+										value: `${isInMarket ? 'Yes' : 'No'}`,
 									},
 									{
 										label: 'Wallet Balance',
@@ -334,9 +341,7 @@ const MarketListItem: React.FC<MarketListItemProps> = ({
 								stats={[
 									{
 										label: 'Borrowed',
-										value: `${borrowed.toFixed(4)} ${
-											market.underlyingSymbol
-										} | $${getDisplayBalance(
+										value: `$${getDisplayBalance(
 											borrowed *
 												decimate(
 													prices[market.token],
@@ -344,9 +349,24 @@ const MarketListItem: React.FC<MarketListItemProps> = ({
 												).toNumber(),
 											0,
 										)}`,
+										subvalue: `${borrowed.toFixed(2)} ${
+											market.underlyingSymbol
+										}`,
 									},
 									{
-										label: 'Borrow Limit Remaining',
+										label: '% of Borrow Limit',
+										value: `${Math.floor(
+											((borrowed *
+												decimate(
+													prices[market.token],
+													36 - market.decimals,
+												).toNumber()) /
+												accountLiquidity.usdBorrow) *
+												100,
+										)}%`,
+									},
+									{
+										label: 'Total Borrow Limit Remaining',
 										value: `$${getDisplayBalance(
 											accountLiquidity.usdBorrowable,
 											0,
@@ -487,6 +507,7 @@ const StyledAccordionBody = styled(Accordion.Body)`
 
 const MarketListHeaderCol = styled(Col)`
 	text-align: right;
+	font-size: 0.875rem;
 
 	&:first-child {
 		text-align: left;

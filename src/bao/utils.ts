@@ -59,6 +59,7 @@ export const getMarkets = (bao: Bao) => {
           totalBorrows,
           collateralFactor,
           reserveFactor,
+          imfFactor,
           supplied,
           decimals,
         }) => ({
@@ -72,6 +73,7 @@ export const getMarkets = (bao: Bao) => {
           totalBorrows,
           collateralFactor,
           reserveFactor,
+          imfFactor,
           supplied,
           decimals,
         }),

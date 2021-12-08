@@ -15,6 +15,7 @@ import { decimate, getDisplayBalance } from '../../../utils/numberFormat'
 type Stat = {
 	label: string
 	value: string
+	subvalue?: string
 }
 
 type StatBlockProps = {
@@ -40,10 +41,13 @@ export const StatBlock = ({ label, stats }: StatBlockProps) => (
 			<p>{label}</p>
 		</StatHeader>
 		<StatWrapper>
-			{stats.map(({ label, value }) => (
+			{stats.map(({ label, value, subvalue }) => (
 				<StatText key={label}>
-					<p>{label}</p>
-					<p style={{ textAlign: 'end' }}>{value}</p>
+					<p style={{ verticalAlign: 'text-top' }}>{label}</p>
+					<StatStack>
+						<p className="value">{value}</p>
+						<p className="subvalue">{subvalue}</p>
+					</StatStack>
 				</StatText>
 			))}
 		</StatWrapper>
@@ -96,6 +100,7 @@ export const MarketDetails = ({ asset, title }: MarketStatBlockProps) => {
 					0,
 			  )}`
 			: '-'
+
 	const totalReservesUsd =
 		prices && asset.totalReserves
 			? `$${getDisplayBalance(
@@ -107,6 +112,7 @@ export const MarketDetails = ({ asset, title }: MarketStatBlockProps) => {
 					0,
 			  )}`
 			: '-'
+
 	const totalSuppliedUsd =
 		prices && asset.supplied
 			? `$${getDisplayBalance(
@@ -118,6 +124,7 @@ export const MarketDetails = ({ asset, title }: MarketStatBlockProps) => {
 					0,
 			  )}`
 			: '-'
+
 	const reserveFactor = asset.reserveFactor
 		? `${asset.reserveFactor * 100}%`
 		: '-'
@@ -132,7 +139,7 @@ export const MarketDetails = ({ asset, title }: MarketStatBlockProps) => {
 				},
 				{
 					label: 'Inital Margin Factor',
-					value: `${asset.imfFactor * 100}%`
+					value: `${asset.imfFactor * 100}%`,
 				},
 				{
 					label: 'Reserve Factor',
@@ -141,6 +148,7 @@ export const MarketDetails = ({ asset, title }: MarketStatBlockProps) => {
 				{
 					label: 'Total Reserves',
 					value: totalReservesUsd,
+
 				},
 			]}
 		/>
@@ -309,6 +317,31 @@ export const MarketStats = ({ operation, asset, amount }: MarketStatProps) => {
 
 	return <></>
 }
+
+const StatStack = styled.div`
+	p {
+		text-align: end;
+	}
+
+	.value {
+		display: block;
+	}
+
+	.subvalue {
+		display: none;
+	}
+
+	&:hover {
+		cursor: default;
+		.value {
+			display: none;
+		}
+
+		.subvalue {
+			display: block;
+		}
+	}
+`
 
 const StatWrapper = styled.div`
 	display: flex;
