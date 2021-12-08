@@ -11,7 +11,9 @@ const GlobalStyle = createGlobalStyle`
     color: ${(props: any) => props.theme.color.text[100]};
     overflow-x: hidden; /* Hide horizontal scrollbar */
     transition: 200ms;
-    background: radial-gradient(circle at center top, ${(props: any) => props.theme.color.background[100]}, ${(props: any) => props.theme.color.background[200]}) 0 0 /
+    background: radial-gradient(circle at center top, ${(props: any) =>
+      props.theme.color.background[100]}, ${(props: any) =>
+  props.theme.color.background[200]}) 0 0 /
     cover fixed;
   }
 
@@ -162,7 +164,11 @@ const GlobalStyle = createGlobalStyle`
   .accordion-item:last-of-type .accordion-button.collapsed {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
-}
+  }
+
+  .card {
+    border-radius: 8px;
+  }
 `
 
 export default GlobalStyle
