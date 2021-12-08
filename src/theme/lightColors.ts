@@ -19,7 +19,7 @@ export const blue = '#0000f0'
 
 export const background ={
   100: '#fff8ee', //light mode
-  200: '#50251c', //dark mode
+  200: '#FFF6F0', //dark mode
 }
 
 export const primary = {

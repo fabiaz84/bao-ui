@@ -11,6 +11,8 @@ const GlobalStyle = createGlobalStyle`
     color: ${(props: any) => props.theme.color.text[100]};
     overflow-x: hidden; /* Hide horizontal scrollbar */
     transition: 200ms;
+    background: radial-gradient(circle at center top, ${(props: any) => props.theme.color.background[100]}, ${(props: any) => props.theme.color.background[200]}) 0 0 /
+    cover fixed;
   }
 
   html {

@@ -1,6 +1,6 @@
 export const background = {
   100: '#1F1B24', //dark mode
-  200: '#fff8ee', //dark mode
+  200: '#120D11', //dark mode
 }
 
 export const monochrome = {
