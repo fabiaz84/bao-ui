@@ -357,7 +357,7 @@ const StatWrapper = styled.div`
 `
 
 const StatHeader = styled.div`
-	color: ${(props) => props.theme.color.text[100]};
+	color: ${(props) => props.theme.color.text[200]};
 	font-size: ${(props) => props.theme.fontSize.sm};
 	font-weight: ${(props) => props.theme.fontWeight.strong};
 	text-align: center;
