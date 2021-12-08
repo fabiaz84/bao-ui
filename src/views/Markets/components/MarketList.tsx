@@ -115,10 +115,10 @@ const MarketListHeader: React.FC = () => {
 	const headers = [
 		'Market',
 		'Supplied',
+		'Collateral',
 		'Borrowed',
 		'Supply APY',
 		'Borrow APR',
-		'Collateral',
 		'Liquidity',
 	]
 
@@ -194,6 +194,13 @@ const MarketListItem: React.FC<MarketListItemProps> = ({
 							)}`}
 						</Col>
 						<Col>
+							{' '}
+							<>
+								{' '}
+								<StyledCheck checked={isInMarket} inline />{' '}
+							</>
+						</Col>
+						<Col>
 							{`$${getDisplayBalance(
 								borrowed *
 									decimate(
@@ -205,13 +212,6 @@ const MarketListItem: React.FC<MarketListItemProps> = ({
 						</Col>
 						<Col>{market.supplyApy.toFixed(2)}%</Col>
 						<Col>{market.borrowApy.toFixed(2)}%</Col>
-						<Col>
-							{' '}
-							<>
-								{' '}
-								<StyledCheck checked={isInMarket} inline />{' '}
-							</>
-						</Col>
 						<Col>
 							{`$${getDisplayBalance(
 								market.supplied *
