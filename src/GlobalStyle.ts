@@ -161,6 +161,14 @@ const GlobalStyle = createGlobalStyle`
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
+
+path {
+  fill: ${(props: any) => props.theme.color.text[100]};
+
+  &:hover {
+    fill: ${(props: any) => props.theme.color.text[400]};
+  }
+}
 `
 
 export default GlobalStyle

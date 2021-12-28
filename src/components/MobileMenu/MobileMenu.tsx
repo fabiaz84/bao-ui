@@ -54,11 +54,13 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
 
 const StyledBackdrop = styled.div`
 	background: ${(props) => props.theme.color.primary[100]};
+	opacity: 0.5;
 	position: absolute;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
+	transition: 200ms;
 `
 
 const StyledMobileMenuWrapper = styled.div`
@@ -83,7 +85,7 @@ const slideIn = keyframes`
 
 const StyledMobileMenu = styled.div`
 	animation: ${slideIn} 0.3s forwards ease-out;
-	background: radial-gradient(circle at center top, #202231, #161522);
+	background: ${(props) => props.theme.color.primary[100]};
 	display: flex;
 	flex: 1;
 	flex-direction: column;
