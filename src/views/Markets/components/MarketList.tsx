@@ -103,6 +103,39 @@ export const MarketList: React.FC<MarketListProps> = ({
 							key={market.token}
 						/>
 					))}
+
+					<MarketListHeader />
+					{activeMarkets.length > 0 && (
+						<>
+							{activeMarkets.map((market: SupportedMarket) => (
+								<MarketListItem
+									market={market}
+									accountBalances={accountBalances}
+									accountMarkets={accountMarkets}
+									accountLiquidity={accountLiquidity}
+									supplyBalances={supplyBalances}
+									borrowBalances={borrowBalances}
+									exchangeRates={exchangeRates}
+									prices={prices}
+									key={market.token}
+								/>
+							))}
+							<hr style={{ margin: '12px' }} />
+						</>
+					)}
+					{markets.map((market: SupportedMarket) => (
+						<MarketListItem
+							market={market}
+							accountBalances={accountBalances}
+							accountMarkets={accountMarkets}
+							accountLiquidity={accountLiquidity}
+							supplyBalances={supplyBalances}
+							borrowBalances={borrowBalances}
+							exchangeRates={exchangeRates}
+							prices={prices}
+							key={market.token}
+						/>
+					))}
 				</>
 			) : (
 				<SpinnerLoader block />
@@ -122,18 +155,44 @@ const MarketListHeader: React.FC = () => {
 		'Liquidity',
 	]
 
+	const mobileHeaders = ['Market', 'Supplied', 'Borrowed']
+
 	return (
 		<Container fluid>
-			<Row style={{ padding: '0.5rem 1.5rem' }}>
+			<ListHeader>
 				{headers.map((header: string) => (
 					<MarketListHeaderCol style={{ paddingBottom: '0px' }} key={header}>
 						<b>{header}</b>
 					</MarketListHeaderCol>
 				))}
-			</Row>
+			</ListHeader>
+			<MobileListHeader>
+				{mobileHeaders.map((header: string) => (
+					<MarketListHeaderCol style={{ paddingBottom: '0px' }} key={header}>
+						<b>{header}</b>
+					</MarketListHeaderCol>
+				))}
+			</MobileListHeader>
 		</Container>
 	)
 }
+
+const ListHeader = styled(Row)`
+	padding: 0.5rem 1.5rem;
+
+	@media (max-width: ${(props) => props.theme.breakpoints.mobile}px) {
+		display: none;
+	}
+`
+
+const MobileListHeader = styled(Row)`
+	padding: 0.5rem 1.5rem;
+	display: none;
+
+	@media (max-width: ${(props) => props.theme.breakpoints.mobile}px) {
+		display: flex;
+	}
+`
 
 const MarketListItem: React.FC<MarketListItemProps> = ({
 	market,
@@ -439,6 +498,12 @@ const StyledAccordionHeader = styled(Accordion.Header)`
 		color: ${(props) => props.theme.color.text[100]};
 		padding: 1.25rem;
 
+		font-size: 1rem;
+
+		@media (max-width: ${(props) => props.theme.breakpoints.mobile}px) {
+			font-size: 0.875rem;
+		}
+
 		&:hover,
 		&:focus,
 		&:active,
@@ -532,5 +597,13 @@ const MarketListHeaderCol = styled(Col)`
 
 	&:last-child {
 		margin-right: 46px;
+	}
+
+	b {
+		font-size: 1rem;
+
+		@media (max-width: ${(props) => props.theme.breakpoints.mobile}px) {
+			font-size: 0.875rem;
+		}
 	}
 `

@@ -1,20 +1,21 @@
-import React from 'react'
 import { useAccountLiquidity } from 'hooks/hard-synths/useAccountLiquidity'
-import useHealthFactor from '../../../hooks/hard-synths/useHealthFactor'
+import React from 'react'
 import {
 	buildStyles,
-	CircularProgressbarWithChildren,
+	CircularProgressbarWithChildren
 } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
-import { getDisplayBalance } from '../../../utils/numberFormat'
 import Tooltipped from '../../../components/Tooltipped'
+import useHealthFactor from '../../../hooks/hard-synths/useHealthFactor'
+import { getDisplayBalance } from '../../../utils/numberFormat'
 import {
 	BorrowLimit,
+	BorrowLimitText,
 	BorrowLimitWrapper,
 	StatWrapper,
 	UserStat,
 	UserStatsContainer,
-	UserStatsWrapper,
+	UserStatsWrapper
 } from './styles'
 
 export const Overview = () => {
@@ -64,14 +65,7 @@ export const Overview = () => {
 							</p>
 						</UserStat>
 					</StatWrapper>
-					<div
-						style={{
-							width: 150,
-							height: 150,
-							marginRight: '75px',
-							marginLeft: '75px',
-						}}
-					>
+					<BorrowLimit>
 						<CircularProgressbarWithChildren
 							value={borrowLimit}
 							strokeWidth={10}
@@ -87,7 +81,7 @@ export const Overview = () => {
 								}}
 							>
 								<BorrowLimitWrapper>
-									<BorrowLimit style={{ marginTop: '15px' }}>
+									<BorrowLimitText style={{ marginTop: '15px' }}>
 										<h1>Borrow Limit</h1>
 										<p>
 											{`${
@@ -102,11 +96,11 @@ export const Overview = () => {
 											}`}
 											%
 										</p>
-									</BorrowLimit>
+									</BorrowLimitText>
 								</BorrowLimitWrapper>
 							</div>
 						</CircularProgressbarWithChildren>
-					</div>
+					</BorrowLimit>
 					<StatWrapper>
 						<UserStat>
 							<h1>Total Borrowed</h1>

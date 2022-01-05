@@ -42,7 +42,7 @@ export const MarketHeader = styled.div`
   padding-left: ${(props) => props.theme.spacing[4]}px;
   padding-right: ${(props) => props.theme.spacing[4]}px;
   text-align: center;
-  font-size: ${(props) => props.theme.fontSize.large}
+  font-size: ${(props) => props.theme.fontSize.large};
 `
 
 export const MarketHeaderText = styled.p`
@@ -179,7 +179,7 @@ export const UserStatsWrapper = styled.div`
 
 export const StatWrapper = styled.div`
   background-color: ${(props) => props.theme.color.primary[100]};
-  margin: 0 1rem;
+  margin: 1rem;
   padding: 16px;
   border-radius: 8px;
   position: relative;
@@ -205,6 +205,30 @@ export const UserStat = styled.div`
     color: ${(props) => props.theme.color.text[200]};
     margin: 0px;
   }
+
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}px) {
+    p {
+      font-size: 1rem;
+      margin: 0px;
+    }
+
+    h1 {
+      font-size: 0.875rem;
+      color: ${(props) => props.theme.color.text[200]};
+      margin: 0px;
+    }
+  }
+`
+
+export const BorrowLimit = styled.div`
+  width: 150px;
+  height: 150px;
+  marginright: 75px;
+  marginleft: 75px;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}px) {
+    display: none;
+  }
 `
 
 export const BorrowLimitWrapper = styled.div`
@@ -217,7 +241,7 @@ export const BorrowLimitWrapper = styled.div`
   border-radius: 50%;
 `
 
-export const BorrowLimit = styled.div`
+export const BorrowLimitText = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
