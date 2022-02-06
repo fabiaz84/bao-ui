@@ -7,6 +7,9 @@ import Multicall from '../utils/multicall'
 import { decimate, exponentiate } from '../utils/numberFormat'
 import { Bao } from './Bao'
 import Config from './lib/config'
+import { MerkleTree } from "merkletreejs"
+import { keccak_256 } from 'js-sha3'
+import WhitelistAdrresses from '../../../json/WhitelistAddresses.json'
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
@@ -31,6 +34,10 @@ export const getMasterChefContract = (bao: Bao): Contract => {
 
 export const getBaoContract = (bao: Bao): Contract => {
   return bao && bao.contracts && bao.getContract('polly')
+}
+
+export const getNftContract = (bao: Bao): Contract => {
+    return bao && bao.contracts && bao.getContract('nft')
 }
 
 export const getBasketContract = (
@@ -426,3 +433,21 @@ export const getAccountLiquidity = async (
   comptrollerContract: Contract,
   account: string,
 ) => await comptrollerContract.methods.getAccountLiquidity(account).call()
+
+export const mint = async (
+    nftContract: Contract,
+    account: string,
+): Promise<string> => {
+
+    const leafNodes = WhitelistAdrresses.addresses.map((address: string) => keccak_256(address));
+    const merkleTree = new MerkleTree(leafNodes, keccak_256, { sortPairs: true });
+    const hexProof = merkleTree.getHexProof(account);
+
+    return nftContract.methods
+        .mintNft(hexProof)
+        .send({ from: account })
+        .on('transactionHash', (tx: { transactionHash: string }) => {
+            console.log(tx)
+            return tx.transactionHash
+        })
+}
