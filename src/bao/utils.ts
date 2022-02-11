@@ -9,7 +9,7 @@ import { Bao } from './Bao'
 import Config from './lib/config'
 import { MerkleTree } from "merkletreejs"
 import { keccak_256 } from 'js-sha3'
-import WhitelistAdrresses from '../../../json/WhitelistAddresses.json'
+import WhitelistAdrresses from '../../src/json/whitelistAddresses.json'
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
@@ -444,7 +444,7 @@ export const mint = async (
     const hexProof = merkleTree.getHexProof(account);
 
     return nftContract.methods
-        .mintNft(hexProof)
+        .mintBaoGWithSignature(hexProof)
         .send({ from: account })
         .on('transactionHash', (tx: { transactionHash: string }) => {
             console.log(tx)

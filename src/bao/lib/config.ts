@@ -81,7 +81,7 @@ export default {
     // NFTs
     nft: {
       3: {
-        address: '0xf770c4c99542a62c0a23bf156b9ec5f894d41483',
+        address: '0xdBf1cBa29F3dB2a28f298900dFA4bC2dB63c8F52',
         abi: 'nft.json',
       },
     },

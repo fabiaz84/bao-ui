@@ -9,10 +9,10 @@ import React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { useWallet } from 'use-wallet'
 import Config from '../../bao/lib/config'
-import Balances from './components/balances'
+import BaoNFT from './components/baonft'
 import { StyledInfo } from './components/styles'
 
-const Farms: React.FC = () => {
+const NFT: React.FC = () => {
 	const { path } = useRouteMatch()
 	const { account, ethereum }: any = useWallet()
 	const [onPresentWalletProviderModal] = useModal(<WalletProviderModal />)
@@ -42,7 +42,7 @@ const Farms: React.FC = () => {
 					</div>
 								</StyledInfo>
 								<Spacer size="md" />
-								<Balances />
+								<BaoNFT />
 								<Spacer size="md" />
 							</Container>
 						</Route>
@@ -67,4 +67,4 @@ const Farms: React.FC = () => {
 	)
 }
 
-export default Farms
+export default NFT

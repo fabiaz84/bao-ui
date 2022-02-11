@@ -12,7 +12,7 @@ import {
 	StyledWrapper,
 } from './styles'
 
-const Balances: React.FC = () => {
+const BaoNFT: React.FC = () => {
 
 	const { onMint } = useMint()
 
@@ -27,7 +27,7 @@ const Balances: React.FC = () => {
 					<Footnote>
 					<Button
 							text="Claim"
-							onclick={onMint}
+							onClick={onMint}
 						/>
 					</Footnote>
 				</Card>
@@ -41,7 +41,7 @@ const Balances: React.FC = () => {
 					<Footnote>
 					<Button
 							text="Claim"
-							onclick={onMint}
+							onClick={onMint}
 						/>
 					</Footnote>
 				</Card>
@@ -51,4 +51,4 @@ const Balances: React.FC = () => {
 	)
 }
 
-export default Balances
+export default BaoNFT
