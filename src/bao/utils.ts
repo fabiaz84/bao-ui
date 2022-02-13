@@ -8,8 +8,8 @@ import { decimate, exponentiate } from '../utils/numberFormat'
 import { Bao } from './Bao'
 import Config from './lib/config'
 import { MerkleTree } from "merkletreejs"
-import { keccak_256 } from 'js-sha3'
-import WhitelistAdrresses from '../../src/json/whitelistAddresses.json'
+import keccak256 from "keccak256"
+import WhitelistAddresses from '../../src/json/whitelistAddresses.json'
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
@@ -435,19 +435,23 @@ export const getAccountLiquidity = async (
 ) => await comptrollerContract.methods.getAccountLiquidity(account).call()
 
 export const mint = async (
-    nftContract: Contract,
-    account: string,
+  nftContract: Contract,
+  account: string,
 ): Promise<string> => {
 
-    const leafNodes = WhitelistAdrresses.addresses.map((address: string) => keccak_256(address));
-    const merkleTree = new MerkleTree(leafNodes, keccak_256, { sortPairs: true });
-    const hexProof = merkleTree.getHexProof(account);
+  const leafNodes = WhitelistAddresses.addresses.map((address: string) => keccak256(address));
+  const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true });
+  const leaf = keccak256(account);
+  const hexProof = merkleTree.getHexProof(leaf);
 
-    return nftContract.methods
-        .mintBaoGWithSignature(hexProof)
-        .send({ from: account })
-        .on('transactionHash', (tx: { transactionHash: string }) => {
-            console.log(tx)
-            return tx.transactionHash
-        })
+  console.log('account\n', account.toString());
+  console.log('Whitelist proof\n', hexProof.toString());
+
+  return nftContract.methods
+      .mintBaoGWithSignature(hexProof)
+      .send({ from: account })
+      .on('transactionHash', (tx: { transactionHash: string }) => {
+          console.log(tx)
+          return tx.transactionHash
+      })
 }
