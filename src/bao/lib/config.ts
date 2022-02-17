@@ -17,7 +17,7 @@ export default {
     uniswapFactory: '0xc35DADB65012eC5796536bD9864eD8773aBc74C4',
     uniswapFactoryV2: '0xc35DADB65012eC5796536bD9864eD8773aBc74C4',
     lendingLogicKashi: '0xcBA495A74e23D5B42853e41334e26DDd322Af082',
-    bUSD: '0x4ab319ae3ef47479c229fe742463b9b2cf1c7647',
+    baoUSD: '0x4ab319ae3ef47479c229fe742463b9b2cf1c7647',
     WETH: '0xc778417E063141139Fce010982780140Aa0cD5Ab',
     DEAD: '0x000000000000000000000000000000000000dead',
   },
@@ -94,7 +94,7 @@ export default {
   markets: [
     {
       mid: 1,
-      symbol: 'bUSD',
+      symbol: 'baoUSD',
       marketAddresses: {
         3: '0xfD4cDC5129Dd794E26FD3764C8f2075EE13B9A53',
       },
@@ -102,7 +102,7 @@ export default {
         3: '0x4aB319aE3EF47479C229fE742463B9b2Cf1c7647',
       },
       isSynth: true,
-      icon: '/bUSD.png',
+      icon: '/baoUSD.png',
       coingeckoId: 'dai',
       decimals: 18,
     },
