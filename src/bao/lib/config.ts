@@ -1,12 +1,12 @@
 import { Config } from './types'
 
 export default {
-  networkId: 1,
+  networkId: 3,
   defaultRpc: {
-    chainId: '0x1',
-    rpcUrls: ['https://rpc.flashbots.net'],
-    blockExplorerUrls: ['https://etherscan.io'],
-    chainName: 'Ethereum Mainnet',
+    chainId: '0x3',
+    rpcUrls: ['https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'],
+    blockExplorerUrls: ['https://ropsten.etherscan.io'],
+    chainName: 'Ropsten Testnet',
     nativeCurrency: {
       name: 'ETH',
       symbol: 'ETH',
@@ -14,16 +14,12 @@ export default {
     },
   },
   addressMap: {
-    uniswapFactory: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
-    uniswapFactoryV2: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
-    BAO: '0x374cb8c27130e2c9e04f44303f3c8351b9de61c1',
-    DAI: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
-    USDT: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-    USDC: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-    WETH: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
-    DEAD: '0x000000000000000000000000000000000000dead',
-    //Synths
+    uniswapFactory: '0xc35DADB65012eC5796536bD9864eD8773aBc74C4',
+    uniswapFactoryV2: '0xc35DADB65012eC5796536bD9864eD8773aBc74C4',
+    lendingLogicKashi: '0xcBA495A74e23D5B42853e41334e26DDd322Af082',
     baoUSD: '0x7945b0A6674b175695e5d1D08aE1e6F13744Abb0',
+    WETH: '0xc778417E063141139Fce010982780140Aa0cD5Ab',
+    DEAD: '0x000000000000000000000000000000000000dead',
   },
   contracts: {
     bao: {
