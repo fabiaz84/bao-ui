@@ -46,72 +46,59 @@ export default {
     },
     // Hard Synths
     comptroller: {
-      1: {
-        address: '0x0Be1fdC1E87127c4fe7C05bAE6437e3cf90Bf8d8',
+      3: {
+        address: '0x831E1605dd6A085E3b47f6F094dF2fa3806D7143',
         abi: 'comptroller.json',
       },
     },
     marketOracle: {
-      1: {
+      3: {
         address: '0xEbdC2D2a203c17895Be0daCdf539eeFC710eaFd8',
         abi: 'marketOracle.json',
       },
     },
     stabilizer: {
-      1: {
-        address: '0x720282BB7e721634c95F0933636DE3171dc405de',
+      3: {
+        address: '0x598D87CA75a9C764A8d1006018ff3c1b72EC816E',
         abi: 'stabilizer.json',
       },
     },
   },
   subgraphs: {
     sushiExchange: {
-      1: 'https://api.thegraph.com/subgraphs/name/sushiswap/exchange',
+      3: 'https://api.thegraph.com/subgraphs/name/sushiswap/matic-exchange',
+      1: 'https://api.thegraph.com/subgraphs/name/sushiswap/exchange'
     },
-    baoBurn: {
-      1: 'https://api.thegraph.com/subgraphs/name/clabby/bao-burn',
+    pollyBurn: {
+      137: 'https://api.thegraph.com/subgraphs/name/clabby/polly-burn'
     },
     baoMarkets: {
-      1: 'https://api.thegraph.com/subgraphs/name/baofinance/bao-markets',
-    },
+      3: 'https://api.thegraph.com/subgraphs/name/clabby/bao-markets-ropsten-subgraph'
+    }
   },
   markets: [
     {
       mid: 1,
-      symbol: 'bdUSD',
+      symbol: 'baoUSD',
       marketAddresses: {
-        1: '0xc0601094C0C88264Ba285fEf0a1b00eF13e79347',
+        3: '0x047C30b85f4d310DAA4d14E8B902B0108618C37a',
       },
       underlyingAddresses: {
-        1: '0x7945b0A6674b175695e5d1D08aE1e6F13744Abb0',
+        3: '0x7945b0A6674b175695e5d1D08aE1e6F13744Abb0',
       },
       isSynth: true,
-      icon: '/bUSD.png',
+      icon: '/baoUSD.png',
       coingeckoId: 'dai',
       underlyingDecimals: 18,
     },
     {
-      mid: 4,
-      symbol: 'bdETH',
-      marketAddresses: {
-        1: '0xF635fdF9B36b557bD281aa02fdfaeBEc04CD084A',
-      },
-      underlyingAddresses: {
-        1: 'ETH',
-      },
-      icon: '/WETH.png',
-      coingeckoId: 'weth',
-      underlyingDecimals: 18,
-    },
-    {
       mid: 2,
-      symbol: 'bdETH',
-      archived: true,
+      symbol: 'bETH',
       marketAddresses: {
-        1: '0xe7a52262C1934951207c5fc7A944A82D283C83e5',
+        3: '0xd4E71A9D982b74110Cc3307d7D296927B3afBBDc',
       },
       underlyingAddresses: {
-        1: 'ETH',
+        3: 'ETH',
       },
       icon: '/WETH.png',
       coingeckoId: 'weth',
@@ -119,16 +106,31 @@ export default {
     },
     {
       mid: 3,
-      symbol: 'bdUSDC',
+      symbol: 'bUSDC',
       marketAddresses: {
-        1: '0x7749f9f3206A49d4c47b60db05716409dC3A4149',
+        3: '0xCaAd85c5a9f31c679742ea6f8654c3B53b4c6d7D',
       },
       underlyingAddresses: {
-        1: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+        3: '0x1c648C939578a4da0D7Fb2384DdB3FcE9439D28d',
       },
       icon: '/USDC.png',
       coingeckoId: 'usd-coin',
       underlyingDecimals: 6,
+    },
+    {
+      mid: 4,
+      symbol: 'baoUSD(OLD)',
+      archived: true,
+      marketAddresses: {
+        3: '0xfD4cDC5129Dd794E26FD3764C8f2075EE13B9A53',
+      },
+      underlyingAddresses: {
+        3: '0x4aB319aE3EF47479C229fE742463B9b2Cf1c7647',
+      },
+      isSynth: true,
+      icon: '/baoUSD.png',
+      coingeckoId: 'dai',
+      underlyingDecimals: 18,
     },
   ],
   baskets: [],
