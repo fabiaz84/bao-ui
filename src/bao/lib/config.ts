@@ -23,20 +23,20 @@ export default {
   },
   contracts: {
     bao: {
-      1: {
-        address: '0x374cb8c27130e2c9e04f44303f3c8351b9de61c1',
+      3: {
+        address: '0x4C392822D4bE8494B798cEA17B43d48B2308109C',
         abi: 'bao.json',
       },
     },
     masterChef: {
-      1: {
-        address: '0xBD530a1c060DC600b951f16dc656E4EA451d1A2D',
+      3: {
+        address: '0x850161bF73944a8359Bd995976a34Bb9fe30d398',
         abi: 'masterchef.json',
       },
     },
     weth: {
-      1: {
-        address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+      3: {
+        address: '0xc778417E063141139Fce010982780140Aa0cD5Ab',
         abi: 'weth.json',
       },
     },

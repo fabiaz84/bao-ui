@@ -70,9 +70,9 @@ const App: React.FC = () => {
 					<Route path="/ballast">
 						<Ballast />
 					</Route>
-					<Route path="/farms">
+					{/* <Route path="/farms">
 						<Farms />
-					</Route>
+					</Route> */}
 				</Switch>
 			</Router>
 		</Providers>
@@ -87,16 +87,16 @@ const Providers: React.FC<ProvidersProps> = ({
 		<ThemeProvider theme={theme(isDarkMode)}>
 			<GlobalStyle />
 			<UseWalletProvider
-				chainId={1}
+				chainId={3}
 				connectors={{
 					walletconnect: {
-						rpcUrl: 'https://rpc.flashbots.net',
+						rpcUrl: 'https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
 					},
 				}}
 			>
 				<BaoProvider>
 					<MarketsProvider>
-						<FarmsProvider>
+						{/* <FarmsProvider> */}
 							<TransactionProvider>
 								<SWRConfig
 									value={{
@@ -107,7 +107,7 @@ const Providers: React.FC<ProvidersProps> = ({
 									<ModalsProvider>{children}</ModalsProvider>
 								</SWRConfig>
 							</TransactionProvider>
-						</FarmsProvider>
+						{/* </FarmsProvider> */}
 					</MarketsProvider>
 				</BaoProvider>
 			</UseWalletProvider>
