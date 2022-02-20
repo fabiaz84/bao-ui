@@ -30,7 +30,7 @@ const BallastButton: React.FC<BallastButtonProps> = ({
 		pendingTx,
 	)
 	const inputBApproval = useAllowancev2(
-		Config.addressMap.bUSD,
+		Config.addressMap.baoUSD,
 		Config.contracts.stabilizer[Config.networkId].address,
 		pendingTx,
 	)
@@ -40,15 +40,15 @@ const BallastButton: React.FC<BallastButtonProps> = ({
 
 		const ballastContract = bao.getContract('stabilizer')
 		if (swapDirection) {
-			// bUSD->DAI
+			// baoUSD->DAI
 			if (!inputBApproval.gt(0)) {
 				const tokenContract = bao.getNewContract(
 					'erc20.json',
-					Config.addressMap.bUSD,
+					Config.addressMap.baoUSD,
 				)
 				return handleTx(
 					approvev2(tokenContract, ballastContract, account),
-					'Ballast: Approve bUSD',
+					'Ballast: Approve baoUSD',
 				)
 			}
 
@@ -56,10 +56,10 @@ const BallastButton: React.FC<BallastButtonProps> = ({
 				ballastContract.methods
 					.sell(exponentiate(inputVal).toString())
 					.send({ from: account }),
-				'Ballast: Swap bUSD to DAI',
+				'Ballast: Swap baoUSD to DAI',
 			)
 		} else {
-			// DAI->bUSD
+			// DAI->baoUSD
 			if (!inputAApproval.gt(0)) {
 				const tokenContract = bao.getNewContract(
 					'erc20.json',
@@ -75,13 +75,10 @@ const BallastButton: React.FC<BallastButtonProps> = ({
 				ballastContract.methods
 					.buy(
 						exponentiate(inputVal)
-							.times(
-								new BigNumber(1).minus(fees['buy'].div(fees['denominator'])),
-							)
 							.toString(),
 					)
 					.send({ from: account }),
-				'Ballast: Swap DAI to bUSD',
+				'Ballast: Swap DAI to baoUSD',
 			)
 		}
 	}
@@ -108,9 +105,9 @@ const BallastButton: React.FC<BallastButtonProps> = ({
 			return 'Pending Transaction'
 		} else {
 			if (swapDirection) {
-				return inputBApproval.gt(0) ? 'Swap bUSD for DAI' : 'Approve bUSD'
+				return inputBApproval.gt(0) ? 'Swap baoUSD for DAI' : 'Approve baoUSD'
 			} else {
-				return inputAApproval.gt(0) ? 'Swap DAI for bUSD' : 'Approve DAI'
+				return inputAApproval.gt(0) ? 'Swap DAI for baoUSD' : 'Approve DAI'
 			}
 		}
 	}
@@ -120,11 +117,6 @@ const BallastButton: React.FC<BallastButtonProps> = ({
 			pendingTx ||
 			new BigNumber(inputVal).isNaN() ||
 			new BigNumber(inputVal)
-				.times(
-					new BigNumber(1).plus(
-						fees[swapDirection ? 'sell' : 'buy'].div(fees['denominator']),
-					),
-				)
 				.gt(maxValues[swapDirection ? 'sell' : 'buy']) ||
 			(swapDirection && new BigNumber(inputVal).gt(decimate(reserves))) ||
 			(!swapDirection && new BigNumber(inputVal).gt(decimate(supplyCap))),

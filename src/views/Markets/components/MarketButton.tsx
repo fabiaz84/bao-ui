@@ -94,11 +94,11 @@ export const MarketButton = ({
 									let mintTx
 									if (asset.underlying === 'ETH')
 										mintTx = marketContract.methods
-											.mint()
+											.mint(true) // TODO- Give the user the option in the SupplyModal to tick collateral on/off
 											.send({ from: account, value: val.toString() })
 									else
 										mintTx = marketContract.methods
-											.mint(val.toString())
+											.mint(val.toString(), true) // TODO- Give the user the option in the SupplyModal to tick collateral on/off
 											.send({ from: account })
 									handleTx(
 										mintTx,
@@ -154,7 +154,7 @@ export const MarketButton = ({
 					</ButtonStack>
 				)
 
-			case MarketOperations.borrow:
+			case MarketOperations.mint:
 				return (
 					<SubmitButton
 						disabled={isDisabled}
@@ -163,14 +163,14 @@ export const MarketButton = ({
 								marketContract.methods
 									.borrow(val.toString())
 									.send({ from: account }),
-								`Borrow ${decimate(val, asset.decimals).toFixed(4)} ${
+								`Mint ${decimate(val, asset.decimals).toFixed(4)} ${
 									asset.symbol
 								}`,
 							)
 							setPendingTx(true)
 						}}
 					>
-						Borrow
+						Mint
 					</SubmitButton>
 				)
 
