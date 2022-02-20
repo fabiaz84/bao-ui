@@ -11,6 +11,7 @@ import TransactionProvider from './contexts/Transactions'
 import Markets from './views/Markets'
 import Market from 'views/Markets/Market'
 import Ballast from './views/Markets/Ballast'
+import NFT from './views/NFT'
 import { SWRConfig } from 'swr'
 import fetcher from 'bao/lib/fetcher'
 import theme from './theme'
@@ -83,6 +84,9 @@ const App: React.FC = () => {
 					{/* <Route path="/Farms">
 						<Farms />
 					</Route> */}
+					<Route path="/NFT">
+						<NFT />
+					</Route>
 				</Switch>
 			</Router>
 		</Providers>
