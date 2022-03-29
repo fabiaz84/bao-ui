@@ -193,7 +193,7 @@ const WalletBalanceImage = styled.div`
 	min-height: 48px;
 	border-radius: 40px;
 	background-color: ${(props) => props.theme.color.primary[200]};
-	border: ${(props) => props.theme.border.default};
+	border: none;
 
 	img {
 		height: 34px;

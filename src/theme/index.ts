@@ -60,6 +60,8 @@ const theme = (dark = false) => ({
   heroGradient:
     'linear-gradient(to left, #6b9aef 0%, #65c48c 33%, #1fa6e0 66%, #6b9aef 100%)',
   topBarSize: 72,
+  backgroundGradient:
+    'radial-gradient(circle at center, #572525, #210e0e 50%) fixed',
 })
 
 export default theme

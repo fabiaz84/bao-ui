@@ -42,8 +42,8 @@ export const secondary = {
 export const text = {
   100: '#fff8ee', //primary
   200: '#aa9585', //secondary
-  300: '#f57d14', //hover link
-  400: '#ce6509', //active link
+  300: '#FFD84B', //hover link
+  400: '#CC9902', //active link
 }
 
 export const accent = {
@@ -59,8 +59,8 @@ export const accent = {
 }
 
 export const transparent = {
-  100: 'rgba(256, 256, 256, 0.1)', //dark
-  200: 'rgba(0, 0, 0, 0.1)', //light
+  100: 'rgba(60, 20, 20, 0.5)', //dark
+  200: 'rgba(256, 256, 256, 0.05)', //light
   300: 'rgba(256, 256, 256, 0.2)', //button shine
 }
 

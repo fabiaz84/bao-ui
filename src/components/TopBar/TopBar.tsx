@@ -50,8 +50,10 @@ const StyledLogoWrapper = styled.div`
 		width: auto;
 	}
 `
-const StyledTopBar = styled(Container)`
+const StyledTopBar = styled.div`
 	margin: auto;
+	border-bottom: ${(props) => props.theme.border.default};
+	width: 100%;
 `
 
 const StyledNavWrapper = styled.div`
@@ -70,7 +72,7 @@ const StyledTopBarInner = styled.div`
 	height: ${(props) => props.theme.topBarSize}px;
 	justify-content: space-between;
 	max-width: ${(props) => props.theme.siteWidth}px;
-	width: 100%;
+	width: 90%;
 `
 
 const StyledAccountButtonWrapper = styled.div`

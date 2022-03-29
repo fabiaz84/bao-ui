@@ -219,7 +219,7 @@ export const StatWrapper = styled(Col)`
 	padding-inline-start: 1rem;
 	padding-inline-end: 1rem;
 	padding: 1.25rem 16px;
-	border: ${(props) => props.theme.border.default};
+	border: none;
 
 	@media (max-width: ${(props) => props.theme.breakpoints.lg}px) {
 		padding: 1rem 12px;
@@ -343,7 +343,7 @@ const DebtLimitWrapper = styled.div`
 	border-radius: 8px;
 	margin-top: 1rem;
 	padding: 1rem;
-	border: ${(props) => props.theme.border.default};
+	border: none;
 `
 
 const DebtLimit = styled.div`

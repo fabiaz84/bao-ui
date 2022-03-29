@@ -114,7 +114,7 @@ const StyledButton = styled.button.attrs((attrs: StyledButtonProps) => ({
 	align-items: center;
 	background: ${(props) => props.theme.color.transparent[100]};
 	border-radius: ${(props) => props.theme.borderRadius}px;
-	border: ${(props) => props.theme.border.default};
+	border: none;
 	padding: ${(props) => -props.theme.spacing[3]}px;
 	color: ${(props) => props.theme.color.text[100]};
 	display: ${(props) => (props.inline ? 'inline-block' : 'flex')};
@@ -198,7 +198,7 @@ export const MaxButton = styled.a`
 	user-select: none;
 	font-weight: ${(props) => props.theme.fontWeight.medium};
 	text-decoration: none;
-	border: ${(props) => props.theme.border.default};
+	border: none;
 	font-weight: ${(props) => props.theme.fontWeight.strong};
 	font-size: ${(props) => props.theme.fontSize.sm};
 
@@ -264,7 +264,7 @@ const NavButton = styled.button`
 	padding-inline-end: 1rem;
 	border-radius: 8px;
 	overflow: hidden;
-	border: ${(props) => props.theme.border.default};
+	border: none;
 	background: ${(props) => props.theme.color.transparent[100]};
 
 	&:focus {
@@ -350,7 +350,7 @@ export const SubmitButton = styled.button`
 	font-size: ${(props) => props.theme.fontSize.default};
 	padding-inline-start: 1rem;
 	padding-inline-end: 1rem;
-	border: ${(props) => props.theme.border.default};
+	border: none;
 	background-color: ${(props) => props.theme.color.transparent[100]};
 	outline: transparent solid 2px;
 	border-radius: 8px;
@@ -398,7 +398,7 @@ export const WalletButton = styled.button`
 	padding-inline-start: 1rem;
 	padding-inline-end: 1rem;
 	border-radius: ${(props) => props.theme.borderRadius}px;
-	border: ${(props) => props.theme.border.default};
+	border: none;
 	background-color: ${(props) => props.theme.color.transparent[100]};
 	outline: transparent solid 2px;
 	color: ${(props) => props.theme.color.text[100]};

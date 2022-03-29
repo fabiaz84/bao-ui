@@ -337,7 +337,7 @@ const StyledAccordionItem = styled.button`
 `
 
 const StyledAccordionHeader = styled.div`
-		background: ${(props) => props.theme.color.primary[100]};
+		background: ${(props) => props.theme.color.transparent[100]};
 		color: ${(props) => props.theme.color.text[100]};
 		padding: 1.25rem;
 		border: none;
@@ -346,7 +346,7 @@ const StyledAccordionHeader = styled.div`
 		&:hover,
 		&:focus,
 		&:active {
-			background: ${(props) => props.theme.color.primary[200]};
+			background: ${(props) => props.theme.color.transparent[200]};
 			color: ${(props) => props.theme.color.text[100]};
 			border: none;
 			box-shadow: none;

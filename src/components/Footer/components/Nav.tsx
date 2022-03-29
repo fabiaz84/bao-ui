@@ -70,7 +70,7 @@ const StyledLink = styled.a`
 		opacity, box-shadow, transform;
 	transition-duration: 200ms;
 	transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-	color: ${(props) => props.theme.color.text[100]};
+	color: ${(props) => props.theme.color.text[400]};
 	padding-left: ${(props) => props.theme.spacing[3]}px;
 	padding-right: ${(props) => props.theme.spacing[3]}px;
 	text-decoration: none;

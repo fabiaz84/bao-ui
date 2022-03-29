@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background: ${(props: any) => props.theme.color.background[100]};
+    background: ${(props: any) => props.theme.backgroundGradient};
     margin: 0;
     font-family: 'Poppins', sans-serif;
     font-size: 16px;

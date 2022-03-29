@@ -508,19 +508,19 @@ const StyledAccordionHeader = styled(Accordion.Header)`
 	}
 
 	> button {
-		background-color: ${(props) => props.theme.color.primary[100]};
+		background-color: ${(props) => props.theme.color.transparent[100]};
 		color: ${(props) => props.theme.color.text[100]};
 		padding: 1.25rem;
-		border: ${(props) => props.theme.border.default};
+		border: none;
 		border-radius: 8px;
 
 		&:hover,
 		&:focus,
 		&:active,
 		&:not(.collapsed) {
-			background-color: ${(props) => props.theme.color.primary[200]};
+			background-color: ${(props) => props.theme.color.transparent[200]};
 			color: ${(props) => props.theme.color.text[100]};
-			border: ${(props) => props.theme.border.default};
+			border: none;
 			box-shadow: none;
 			border-radius: 8px 8px 0px 0px;
 		}
@@ -530,7 +530,7 @@ const StyledAccordionHeader = styled(Accordion.Header)`
 
 			&:focus,
 			&:active {
-				border-color: ${(props) => props.theme.color.primary[300]};
+				border-color: ${(props) => props.theme.color.transparent[300]};
 			}
 
 			::after {
@@ -576,10 +576,10 @@ const StyledAccordionItem = styled(Accordion.Item)`
 `
 
 const StyledAccordionBody = styled(Accordion.Body)`
-	background-color: ${(props) => props.theme.color.primary[100]};
+	background-color: ${(props) => props.theme.color.transparent[100]};
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
-	border: ${(props) => props.theme.border.default};
+	border: none;
 	border-top: none;
 `
 
@@ -614,7 +614,7 @@ const OfflineAccordionItem = styled.div`
 `
 
 const OfflineAccordionHeader = styled.div`
-		background: ${(props) => props.theme.color.primary[100]};
+		background: ${(props) => props.theme.color.transparent[100]};
 		color: ${(props) => props.theme.color.text[100]};
 		padding: 1.25rem;
 		border: none;
@@ -623,7 +623,7 @@ const OfflineAccordionHeader = styled.div`
 		&:hover,
 		&:focus,
 		&:active {
-			background: ${(props) => props.theme.color.primary[200]};
+			background: ${(props) => props.theme.color.transparent[200]};
 			color: ${(props) => props.theme.color.text[100]};
 			border: none;
 			box-shadow: none;
