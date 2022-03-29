@@ -54,6 +54,9 @@ const StyledTopBar = styled.div`
 	margin: auto;
 	border-bottom: ${(props) => props.theme.border.default};
 	width: 100%;
+	position: fixed;
+	z-index: 999999;
+	background: ${(props) => props.theme.color.background[100]};
 `
 
 const StyledNavWrapper = styled.div`
@@ -66,6 +69,7 @@ const StyledNavWrapper = styled.div`
 `
 
 const StyledTopBarInner = styled.div`
+	background: ${(props) => props.theme.color.background[100]};
 	margin: auto;
 	align-items: center;
 	display: flex;
@@ -73,6 +77,7 @@ const StyledTopBarInner = styled.div`
 	justify-content: space-between;
 	max-width: ${(props) => props.theme.siteWidth}px;
 	width: 90%;
+	z-index: 999999;
 `
 
 const StyledAccountButtonWrapper = styled.div`

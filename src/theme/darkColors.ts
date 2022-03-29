@@ -1,5 +1,5 @@
 export const background = {
-  100: '#1F1B24', //dark mode
+  100: '#210e0e', //dark mode
   200: '#fff8ee', //dark mode
 }
 
@@ -20,8 +20,8 @@ export const green = '#008000'
 export const blue = '#0000f0'
 
 export const primary = {
-  100: '#353139',
-  200: '#4b484f',
+  100: '#642828',
+  200: '#803434',
   300: '#625F65',
   400: '#78767b',
   500: '#8f8d91',
@@ -60,8 +60,8 @@ export const accent = {
 
 export const transparent = {
   100: 'rgba(60, 20, 20, 0.5)', //dark
-  200: 'rgba(256, 256, 256, 0.05)', //light
-  300: 'rgba(256, 256, 256, 0.2)', //button shine
+  200: 'rgba(0, 0, 0, 0.1)', //light
+  300: 'rgba(256, 256, 256, 0.05)', //button shine
 }
 
 export const darkGrey = {
