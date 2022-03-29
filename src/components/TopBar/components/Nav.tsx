@@ -12,19 +12,26 @@ const Nav: React.FC = () => {
 			>
 				Markets
 			</StyledLink>
-			<StyledLink
+			{/* <StyledLink
 				exact
 				activeClassName="active"
 				to={{ pathname: '/ballast' }}
 			>
 				Ballast
-			</StyledLink>
-			<StyledLink
+			</StyledLink> */}
+			{/* <StyledLink
 				exact
 				activeClassName="active"
 				to={{ pathname: '/farms' }}
 			>
 				Farms
+			</StyledLink> */}
+			<StyledLink
+				exact
+				activeClassName="active"
+				to={{ pathname: '/NFT' }}
+			>
+				NFT
 			</StyledLink>
 			<StyledAbsoluteLink
 				href="https://snapshot.page/#/baovotes.eth"

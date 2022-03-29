@@ -59,6 +59,19 @@ export default {
         abi: 'stabilizer.json',
       },
     },
+    // NFTs
+    nft: {
+      3: {
+        address: '0xf3fb04dac124b35baaa8b8b003eb288ca669320f',
+        abi: 'nft.json',
+      },
+    },
+    nft2: {
+      3: {
+        address: '0x8eb6b60450ad7c843ae519fb2e235c22ac20c017',
+        abi: 'nft.json',
+      },
+    },
   },
   subgraphs: {
     sushiExchange: {
