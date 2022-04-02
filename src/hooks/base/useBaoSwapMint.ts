@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { useWallet } from 'use-wallet'
-import { getBaoSwapNFTContract, mint} from '../../bao/utils'
+import { getBaoSwapNFTContract, mintBaoSwap} from '../../bao/utils'
 import useBao from './useBao'
 
 const useBaoSwapMint = () => {
@@ -10,7 +10,7 @@ const useBaoSwapMint = () => {
 
     const handleMint = useCallback(
         async () => {
-            const txHash = await mint(
+            const txHash = await mintBaoSwap(
                 nftContract,
                 account,
             )
