@@ -168,9 +168,6 @@ const GlobalStyle = createGlobalStyle`
 .card {
   background-color: ${(props) => props.theme.color.primary[100]};
 	border-radius: ${(props) => props.theme.borderRadius}px;
-	display: flex;
-	flex: 1;
-	flex-direction: column;
   border: ${(props) => props.theme.border.default};
 }
 
