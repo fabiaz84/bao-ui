@@ -1,5 +1,5 @@
 export const background = {
-  100: '#1F1B24', //dark mode
+  100: '#210e0e', //dark mode
   200: '#fff8ee', //dark mode
 }
 
@@ -20,11 +20,11 @@ export const green = '#008000'
 export const blue = '#0000f0'
 
 export const primary = {
-  100: '#353139',
-  200: '#4b484f',
-  300: '#625F65',
-  400: '#78767b',
-  500: '#8f8d91',
+  100: '#210e0e',
+  200: '#391818',
+  300: '#481e1e',
+  400: '#562424',
+  500: '#622a2a',
 }
 
 export const secondary = {
@@ -42,8 +42,8 @@ export const secondary = {
 export const text = {
   100: '#fff8ee', //primary
   200: '#aa9585', //secondary
-  300: '#f57d14', //hover link
-  400: '#ce6509', //active link
+  300: '#FFD84B', //hover link
+  400: '#CC9902', //active link
 }
 
 export const accent = {
@@ -59,9 +59,9 @@ export const accent = {
 }
 
 export const transparent = {
-  100: 'rgba(256, 256, 256, 0.1)', //dark
+  100: 'rgba(60, 20, 20, 0.5)', //dark
   200: 'rgba(0, 0, 0, 0.1)', //light
-  300: 'rgba(256, 256, 256, 0.2)', //button shine
+  300: 'rgba(256, 256, 256, 0.05)', //button shine
 }
 
 export const darkGrey = {

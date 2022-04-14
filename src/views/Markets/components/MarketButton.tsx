@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useWeb3React } from '@web3-react/core'
 import Config from 'bao/lib/config'
 import { ActiveSupportedMarket } from 'bao/lib/types'
 import { approvev2 } from 'bao/utils'
@@ -9,7 +10,6 @@ import useTransactionHandler from 'hooks/base/useTransactionHandler'
 import { useApprovals } from 'hooks/markets/useApprovals'
 import React from 'react'
 import styled from 'styled-components'
-import { useWeb3React } from '@web3-react/core'
 import { decimate } from 'utils/numberFormat'
 import { MarketOperations } from './Modals'
 
@@ -18,6 +18,7 @@ type MarketButtonProps = {
 	asset: ActiveSupportedMarket
 	val: BigNumber
 	isDisabled: boolean
+	onHide: () => void
 }
 
 export const MarketButton = ({
@@ -25,6 +26,7 @@ export const MarketButton = ({
 	asset,
 	val,
 	isDisabled,
+	onHide,
 }: MarketButtonProps) => {
 	const { pendingTx, handleTx } = useTransactionHandler()
 	const bao = useBao()
@@ -75,6 +77,7 @@ export const MarketButton = ({
 										`Supply ${decimate(val, asset.underlyingDecimals).toFixed(
 											4,
 										)} ${asset.underlyingSymbol}`,
+										() => onHide(),
 									)
 								}}
 							>
@@ -110,6 +113,7 @@ export const MarketButton = ({
 									`Withdraw ${decimate(val, asset.underlyingDecimals).toFixed(
 										4,
 									)} ${asset.underlyingSymbol}`,
+									() => onHide(),
 								)
 							}}
 						>
@@ -130,6 +134,7 @@ export const MarketButton = ({
 								`Mint ${decimate(val, asset.underlyingDecimals).toFixed(4)} ${
 									asset.symbol
 								}`,
+								() => onHide(),
 							)
 						}}
 					>
@@ -160,6 +165,7 @@ export const MarketButton = ({
 										`Repay ${decimate(val, asset.underlyingDecimals).toFixed(
 											4,
 										)} ${asset.underlyingSymbol}`,
+										() => onHide(),
 									)
 								}}
 							>

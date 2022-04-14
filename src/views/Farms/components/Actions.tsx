@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useWeb3React } from '@web3-react/core'
 import baoIcon from 'assets/img/logo.svg'
 import Config from 'bao/lib/config'
-import { approvev2, getMasterChefContract } from 'bao/utils'
+import { approvev2, getMasterChefContract, getRefUrl } from 'bao/utils'
 import BigNumber from 'bignumber.js'
 import { SubmitButton } from 'components/Button/Button'
 import ExternalLink from 'components/ExternalLink'
@@ -11,10 +11,8 @@ import TokenInput from 'components/TokenInput'
 import { PoolType } from 'contexts/Farms/types'
 import { ethers } from 'ethers'
 import useAllowance from 'hooks/base/useAllowance'
-import useApprove from 'hooks/base/useApprove'
 import useBao from 'hooks/base/useBao'
 import useBlockDiff from 'hooks/base/useBlockDiff'
-import useTokenBalance from 'hooks/base/useTokenBalance'
 import useTransactionHandler from 'hooks/base/useTransactionHandler'
 import useEarnings from 'hooks/farms/useEarnings'
 import useFees from 'hooks/farms/useFees'
@@ -24,9 +22,9 @@ import { default as React, useCallback, useMemo, useState } from 'react'
 import { Col, Modal, ModalBody, Row } from 'react-bootstrap'
 import styled from 'styled-components'
 import {
-    exponentiate,
-    getDisplayBalance,
-    getFullDisplayBalance
+	exponentiate,
+	getDisplayBalance,
+	getFullDisplayBalance,
 } from 'utils/numberFormat'
 import { Contract } from 'web3-eth-contract'
 import { FarmWithStakedValue } from './FarmList'
@@ -146,12 +144,6 @@ const BalanceValue = styled.div`
 	font-size: 24px;
 	font-weight: 700;
 `
-
-interface FarmListItemProps {
-	farm: FarmWithStakedValue
-	operation: string
-}
-
 interface StakeProps {
 	lpContract: Contract
 	lpTokenAddress: string
@@ -159,8 +151,8 @@ interface StakeProps {
 	max: BigNumber
 	tokenName?: string
 	poolType: PoolType
-	ref?: string
 	pairUrl: string
+	onHide?: () => void
 }
 
 export const Stake: React.FC<StakeProps> = ({
@@ -170,8 +162,8 @@ export const Stake: React.FC<StakeProps> = ({
 	poolType,
 	max,
 	tokenName = '',
-	ref = '0x0000000000000000000000000000000000000000',
 	pairUrl = '',
+	onHide,
 }) => {
 	const bao = useBao()
 	const { account } = useWeb3React()
@@ -181,8 +173,6 @@ export const Stake: React.FC<StakeProps> = ({
 	const fullBalance = useMemo(() => {
 		return getFullDisplayBalance(max)
 	}, [max])
-
-	const walletBalance = useTokenBalance(lpTokenAddress)
 
 	const handleChange = useCallback(
 		(e: React.FormEvent<HTMLInputElement>) => {
@@ -204,25 +194,14 @@ export const Stake: React.FC<StakeProps> = ({
 		)
 	}, [fullBalance, setVal])
 
-	const [requestedApproval, setRequestedApproval] = useState(false)
-
 	const allowance = useAllowance(lpContract)
-	const { onApprove } = useApprove(lpContract)
-
-	const handleApprove = useCallback(async () => {
-		try {
-			setRequestedApproval(true)
-			const txHash = await onApprove()
-			// user rejected tx or didn't go thru
-			if (!txHash) {
-				setRequestedApproval(false)
-			}
-		} catch (e) {
-			console.log(e)
-		}
-	}, [onApprove, setRequestedApproval])
 
 	const masterChefContract = getMasterChefContract(bao)
+
+	const hideModal = useCallback(() => {
+		onHide()
+		setVal('')
+	}, [onHide])
 
 	return (
 		<>
@@ -286,7 +265,6 @@ export const Stake: React.FC<StakeProps> = ({
 								</SubmitButton>
 							) : (
 								<SubmitButton
-									disabled={requestedApproval}
 									onClick={async () => {
 										handleTx(
 											approvev2(lpContract, masterChefContract, account),
@@ -331,12 +309,13 @@ export const Stake: React.FC<StakeProps> = ({
 													.deposit(
 														pid,
 														ethers.utils.parseUnits(val.toString(), 18),
-														ref,
+														getRefUrl(),
 													)
 													.send({ from: account })
 												handleTx(
 													stakeTx,
 													`Deposit ${parseFloat(val).toFixed(4)} ${tokenName}`,
+													() => hideModal(),
 												)
 											}}
 										>
@@ -354,12 +333,13 @@ export const Stake: React.FC<StakeProps> = ({
 											.deposit(
 												pid,
 												ethers.utils.parseUnits(val.toString(), 18),
-												ref,
+												getRefUrl(),
 											)
 											.send({ from: account })
 										handleTx(
 											stakeTx,
 											`Deposit ${parseFloat(val).toFixed(4)} ${tokenName}`,
+											() => hideModal(),
 										)
 									}}
 								>
@@ -379,9 +359,9 @@ interface UnstakeProps {
 	max: BigNumber
 	tokenName?: string
 	pid: number
-	ref?: string
 	pairUrl: string
 	lpTokenAddress: string
+	onHide?: () => void
 }
 
 export const Unstake: React.FC<UnstakeProps> = ({
@@ -389,9 +369,9 @@ export const Unstake: React.FC<UnstakeProps> = ({
 	max,
 	tokenName = '',
 	pid = null,
-	ref = '0x0000000000000000000000000000000000000000',
 	pairUrl = '',
 	lpTokenAddress = '',
+	onHide,
 }) => {
 	const bao = useBao()
 	const { account } = useWeb3React()
@@ -431,6 +411,11 @@ export const Unstake: React.FC<UnstakeProps> = ({
 	const masterChefContract = getMasterChefContract(bao)
 
 	const [showFeeModal, setShowFeeModal] = useState(false)
+
+	const hideModal = useCallback(() => {
+		onHide()
+		setVal('')
+	}, [onHide])
 
 	return (
 		<>
@@ -519,9 +504,15 @@ export const Unstake: React.FC<UnstakeProps> = ({
 											: new BigNumber(0).toFixed(4)
 
 									unstakeTx = masterChefContract.methods
-										.withdraw(pid, ethers.utils.parseUnits(val, 18), ref)
+										.withdraw(
+											pid,
+											ethers.utils.parseUnits(val, 18),
+											getRefUrl(),
+										)
 										.send({ from: account })
-									handleTx(unstakeTx, `Withdraw ${amount} ${tokenName}`)
+									handleTx(unstakeTx, `Withdraw ${amount} ${tokenName}`, () =>
+										hideModal(),
+									)
 								}}
 							>
 								Withdraw {tokenName}
@@ -617,12 +608,12 @@ const FarmModalBody = styled(ModalBody)`
 `
 
 export const QuestionIcon = styled(FontAwesomeIcon)`
-  color: ${(props) => props.theme.color.text[200]};
+	color: ${(props) => props.theme.color.text[200]};
 
-  &:hover,
-  &:focus {
-    color: ${(props) => props.theme.color.text[100]};
-    animation: 200ms;
-    cursor: pointer;
-  }
+	&:hover,
+	&:focus {
+		color: ${(props) => props.theme.color.text[100]};
+		animation: 200ms;
+		cursor: pointer;
+	}
 `

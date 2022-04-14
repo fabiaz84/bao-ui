@@ -333,13 +333,13 @@ const StatWrapper = styled.div`
 	padding-top: ${(props) => props.theme.spacing[2]};
 	margin-inline: 0px;
 	margin-bottom: 0px;
-	background: ${(props) => props.theme.color.primary[200]};
+	background: ${(props) => props.theme.color.primary[100]};
 	padding: 16px;
 	border-radius: 8px;
 
 	@media (max-width: ${(props) => props.theme.breakpoints.lg}px) {
-		padding: 15px 30px;	
-		}
+		padding: 15px 30px;
+	}
 `
 
 const StatHeader = styled.div`
@@ -387,6 +387,6 @@ const StatText = styled.div`
 	}
 
 	&:nth-child(odd) {
-		background-color: ${(props) => props.theme.color.primary[300]};
+		background-color: ${(props) => props.theme.color.primary[200]};
 	}
 `

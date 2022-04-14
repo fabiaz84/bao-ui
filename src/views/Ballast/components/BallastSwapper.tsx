@@ -1,10 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import baoUSDIcon from 'assets/img/assets/bUSD.png'
+import daiIcon from 'assets/img/assets/DAI.png'
 import Config from 'bao/lib/config'
 import BigNumber from 'bignumber.js'
 import { BalanceInput } from 'components/Input'
 import { SpinnerLoader } from 'components/Loader'
 import Tooltipped from 'components/Tooltipped'
 import useBao from 'hooks/base/useBao'
+import useBlock from 'hooks/base/useBlock'
 import useTokenBalance from 'hooks/base/useTokenBalance'
 import useTransactionProvider from 'hooks/base/useTransactionProvider'
 import React, { useCallback, useEffect, useState } from 'react'
@@ -13,14 +16,13 @@ import styled from 'styled-components'
 import Multicall from 'utils/multicall'
 import { decimate, getDisplayBalance } from 'utils/numberFormat'
 import BallastButton from './BallastButton'
-import baoUSDIcon from 'assets/img/assets/bUSD.png'
-import daiIcon from 'assets/img/assets/DAI.png'
 
 const BallastSwapper: React.FC = () => {
 	const bao = useBao()
 	const { transactions } = useTransactionProvider()
 	const [swapDirection, setSwapDirection] = useState(false) // false = DAI->baoUSD | true = baoUSD->DAI
 	const [inputVal, setInputVal] = useState('')
+	const block = useBlock()
 
 	const [reserves, setReserves] = useState<BigNumber | undefined>()
 	const [supplyCap, setSupplyCap] = useState<BigNumber | undefined>()
@@ -68,7 +70,7 @@ const BallastSwapper: React.FC = () => {
 		if (!bao) return
 
 		fetchBallastInfo()
-	}, [bao, transactions])
+	}, [bao, transactions, block])
 
 	const daiInput = (
 		<>
@@ -193,7 +195,7 @@ const BallastSwapCard = styled(Card)`
 	margin: auto;
 	background-color: ${(props) => props.theme.color.primary[100]};
 	border-radius: ${(props) => props.theme.borderRadius}px;
-	border: ${(props) => props.theme.border.default};
+	border: none;
 
 	label > span {
 		float: right;
@@ -222,7 +224,7 @@ const SwapDirection = styled.a`
 const SwapDirectionBadge = styled(Badge)`
 	background-color: ${(props) => props.theme.color.primary[200]} !important;
 	color: ${(props) => props.theme.color.text[100]};
-	border: ${(props) => props.theme.border.default};
+	border: none;
 	margin-bottom: 0.5rem;
 
 	&:hover {

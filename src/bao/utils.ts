@@ -2,15 +2,14 @@ import BigNumber from 'bignumber.js'
 import { ethers } from 'ethers'
 import _ from 'lodash'
 import { Contract } from 'web3-eth-contract'
-import { Farm } from 'contexts/Farms'
 import Multicall from 'utils/multicall'
 import { decimate, exponentiate } from 'utils/numberFormat'
 import { Bao } from './Bao'
 import Config from './lib/config'
 import { MerkleTree } from 'merkletreejs'
 import keccak256 from 'keccak256'
-import WhitelistAddresses from 'views/NFT/whitelist/whitelistAddresses.json'
-import WhitelistAddresses1 from 'views/NFT/whitelist/whitelistAddresses1.json'
+import baoElderWL from 'views/NFT/components/baoElderWL.json'
+import baoSwapWL from 'views/NFT/components/baoSwapWL.json'
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
@@ -41,7 +40,7 @@ export const getElderContract = (bao: Bao): Contract => {
   return bao && bao.contracts && bao.getContract('nft')
 }
 
-export const getBaoSwapNFTContract = (bao: Bao): Contract => {
+export const getBaoSwapContract = (bao: Bao): Contract => {
   return bao && bao.contracts && bao.getContract('nft2')
 }
 
@@ -415,7 +414,7 @@ export const mintElder = async (
   nftContract: Contract,
   account: string,
 ): Promise<string> => {
-  const leafNodes = WhitelistAddresses.addresses.map((address: string) =>
+  const leafNodes = baoElderWL.addresses.map((address: string) =>
     keccak256(address),
   )
   const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true })
@@ -438,15 +437,12 @@ export const mintBaoSwap = async (
   nftContract: Contract,
   account: string,
 ): Promise<string> => {
-  const leafNodes = WhitelistAddresses1.addresses.map((address: string) =>
+  const leafNodes = baoSwapWL.addresses.map((address: string) =>
     keccak256(address),
   )
   const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true })
   const leaf = keccak256(account)
   const hexProof = merkleTree.getHexProof(leaf)
-
-  console.log('account\n', account.toString())
-  console.log('Whitelist proof\n', hexProof.toString())
 
   return nftContract.methods
     .mintBaoGWithSignature(hexProof)

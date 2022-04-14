@@ -36,6 +36,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
 					>
 						Farms
 					</StyledLink>
+					<StyledLink
+						exact
+						activeClassName="active"
+						to="/NFT"
+						onClick={onDismiss}
+					>
+						NFT
+					</StyledLink>
 					<StyledAbsoluteLink
 						href="https://snapshot.page/#/baovotes.eth"
 						target="_blank"
@@ -102,7 +110,7 @@ const StyledMobileMenu = styled.div`
 	padding-top: 100px;
 	padding-bottom: 100px;
 	overflow-y: scroll;
-	border: ${(props) => props.theme.border.default};
+	border: none;
 `
 
 const StyledLink = styled(NavLink)`

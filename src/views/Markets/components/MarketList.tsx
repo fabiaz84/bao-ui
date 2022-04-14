@@ -12,13 +12,13 @@ import useBao from 'hooks/base/useBao'
 import useTransactionHandler from 'hooks/base/useTransactionHandler'
 import {
 	AccountLiquidity,
-	useAccountLiquidity
+	useAccountLiquidity,
 } from 'hooks/markets/useAccountLiquidity'
 import {
 	Balance,
 	useAccountBalances,
 	useBorrowBalances,
-	useSupplyBalances
+	useSupplyBalances,
 } from 'hooks/markets/useBalances'
 import { useExchangeRates } from 'hooks/markets/useExchangeRates'
 import { useAccountMarkets } from 'hooks/markets/useMarkets'
@@ -29,7 +29,7 @@ import {
 	Col,
 	Container,
 	FormCheck,
-	Row
+	Row,
 } from 'react-bootstrap'
 import styled from 'styled-components'
 import { decimate, getDisplayBalance } from 'utils/numberFormat'
@@ -528,11 +528,6 @@ const StyledAccordionHeader = styled(Accordion.Header)`
 		&:not(.collapsed) {
 			transition: none;
 
-			&:focus,
-			&:active {
-				border-color: ${(props) => props.theme.color.primary[300]};
-			}
-
 			::after {
 				background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='${(
 					props,
@@ -614,18 +609,17 @@ const OfflineAccordionItem = styled.div`
 `
 
 const OfflineAccordionHeader = styled.div`
-		background: ${(props) => props.theme.color.primary[100]};
+		background: ${(props) => props.theme.color.transparent[100]};
 		color: ${(props) => props.theme.color.text[100]};
 		padding: 1.25rem;
-		border: none;
+		border: ${(props) => props.theme.border.default};
 		border-radius: 8px;
 
 		&:hover,
 		&:focus,
 		&:active {
-			background: ${(props) => props.theme.color.primary[200]};
+			background: ${(props) => props.theme.color.transparent[200]};
 			color: ${(props) => props.theme.color.text[100]};
-			border: none;
 			box-shadow: none;
 		}
 		

@@ -112,7 +112,7 @@ const StyledButton = styled.button.attrs((attrs: StyledButtonProps) => ({
 	target: attrs.target || '',
 }))<StyledButtonProps>`
 	align-items: center;
-	background: ${(props) => props.theme.color.transparent[100]};
+	background: ${(props) => props.theme.color.primary[200]};
 	border-radius: ${(props) => props.theme.borderRadius}px;
 	border: ${(props) => props.theme.border.default};
 	padding: ${(props) => -props.theme.spacing[3]}px;
@@ -146,7 +146,7 @@ const StyledButton = styled.button.attrs((attrs: StyledButtonProps) => ({
 
 	&:hover,
 	&:active {
-		background-color: ${(props) => props.theme.color.transparent[200]};
+		background-color: ${(props) => props.theme.color.primary[300]};
 		color: ${(props) => props.theme.color.text[100]};
 		cursor: ${(props) =>
 			props.disabled ? 'not-allowed' : 'pointer'} !important;
@@ -190,7 +190,7 @@ const ButtonLink = styled.a`
 export const MaxButton = styled.a`
 	padding: ${(props) => props.theme.spacing[2]}px;
 	color: ${(props) => props.theme.color.text[100]};
-	background: ${(props) => props.theme.color.transparent[100]};
+	background: ${(props) => props.theme.color.primary[300]};
 	border-radius: ${(props) => props.theme.borderRadius}px;
 	vertical-align: middle;
 	margin-right: ${(props) => props.theme.spacing[2]}px;
@@ -203,7 +203,7 @@ export const MaxButton = styled.a`
 	font-size: ${(props) => props.theme.fontSize.sm};
 
 	&:hover {
-		background: ${(props) => props.theme.color.transparent[200]};
+		background: ${(props) => props.theme.color.primary[400]};
 		color: ${(props) => props.theme.color.text[100]};
 		cursor: pointer;
 	}
@@ -265,14 +265,14 @@ const NavButton = styled.button`
 	border-radius: 8px;
 	overflow: hidden;
 	border: ${(props) => props.theme.border.default};
-	background: ${(props) => props.theme.color.transparent[100]};
+	background: ${(props) => props.theme.color.primary[300]};
 
 	&:focus {
 		outline: 0;
 	}
 
 	&:hover {
-		background: ${(props) => props.theme.color.transparent[200]};
+		background: ${(props) => props.theme.color.primary[400]};
 		cursor: pointer;
 		color: ${(props) => props.theme.color.text[100]};
 	}
@@ -351,8 +351,8 @@ export const SubmitButton = styled.button`
 	padding-inline-start: 1rem;
 	padding-inline-end: 1rem;
 	border: ${(props) => props.theme.border.default};
-	background-color: ${(props) => props.theme.color.transparent[100]};
-	outline: transparent solid 2px;
+	background-color: ${(props) => props.theme.color.primary[200]};
+	outline: none;
 	border-radius: 8px;
 	color: ${(props) => props.theme.color.text[100]};
 	opacity: ${(props) => (props.disabled ? 0.5 : 1)};
@@ -364,7 +364,7 @@ export const SubmitButton = styled.button`
 	}
 
 	&:hover {
-		background: ${(props) => props.theme.color.transparent[200]};
+		background: ${(props) => props.theme.color.primary[300]};
 		cursor: pointer;
 		color: ${(props) => props.theme.color.text[100]};
 	}
@@ -398,8 +398,8 @@ export const WalletButton = styled.button`
 	padding-inline-start: 1rem;
 	padding-inline-end: 1rem;
 	border-radius: ${(props) => props.theme.borderRadius}px;
-	border: ${(props) => props.theme.border.default};
-	background-color: ${(props) => props.theme.color.transparent[100]};
+	border: none;
+	background-color: ${(props) => props.theme.color.primary[100]};
 	outline: transparent solid 2px;
 	color: ${(props) => props.theme.color.text[100]};
 	opacity: ${(props) => (props.disabled ? 0.5 : 1)};
@@ -412,7 +412,7 @@ export const WalletButton = styled.button`
 	}
 
 	  &:hover{
-		background: ${(props) => props.theme.color.transparent[200]};
+		background: ${(props) => props.theme.color.primary[200]};
 		cursor: pointer;
 	  }
 	}

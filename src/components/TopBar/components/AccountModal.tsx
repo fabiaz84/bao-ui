@@ -94,22 +94,21 @@ const AccountModal = ({ onHide, show }: ModalProps) => {
 							</span>
 							{Object.keys(transactions).length > 0 && (
 								<small>
-									<span>
-										<a
-											href="#"
-											style={{ float: 'right', verticalAlign: 'middle' }}
-											onClick={() => {
-												localStorage.setItem('transactions', '{}')
-												window.location.reload()
-											}}
-										>
+									<ClearButton
+										onClick={() => {
+											localStorage.setItem('transactions', '{}')
+											window.location.reload()
+										}}
+									>
+										{' '}
+										<span>
 											<FontAwesomeIcon
 												icon="times"
 												style={{ verticalAlign: 'middle' }}
 											/>{' '}
 											Clear
-										</a>
-									</span>
+										</span>
+									</ClearButton>
 								</small>
 							)}
 						</span>
@@ -120,7 +119,7 @@ const AccountModal = ({ onHide, show }: ModalProps) => {
 									.slice(0, 5)
 									.map((txHash) => (
 										<StatText>
-											<p>
+											<MaxLabel>
 												{transactions[txHash].receipt ? (
 													<FontAwesomeIcon
 														icon="check"
@@ -131,10 +130,10 @@ const AccountModal = ({ onHide, show }: ModalProps) => {
 												) : (
 													<SpinnerLoader />
 												)}
-											</p>
-											<p style={{ textAlign: 'end' }}>
+											</MaxLabel>
+											<MaxLabel style={{ textAlign: 'end' }}>
 												{transactions[txHash].description}
-											</p>
+											</MaxLabel>
 										</StatText>
 									))}
 							</>
@@ -193,7 +192,7 @@ const WalletBalanceImage = styled.div`
 	min-height: 48px;
 	border-radius: 40px;
 	background-color: ${(props) => props.theme.color.primary[200]};
-	border: ${(props) => props.theme.border.default};
+	border: none;
 
 	img {
 		height: 34px;
@@ -259,6 +258,19 @@ const StatText = styled.div`
 		margin-top: 0px;
 		margin-inline: 0.5rem 0px;
 		margin-bottom: 0px;
+	}
+`
+
+const ClearButton = styled.button`
+	float: right;
+	vertical-align: middle;
+	background-color: ${(props) => props.theme.color.primary[400]} !important;
+	border-radius: 8px;
+	border: none;
+	color: ${(props) => props.theme.color.text[100]};
+
+	&:hover {
+		background-color: ${(props) => props.theme.color.primary[500]} !important;
 	}
 `
 

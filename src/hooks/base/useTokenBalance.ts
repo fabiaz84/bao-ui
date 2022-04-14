@@ -2,13 +2,12 @@ import BigNumber from 'bignumber.js'
 import { useCallback, useEffect, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { getBalance } from 'utils/erc20'
-import { provider } from 'web3-core'
 import useBao from './useBao'
 import useTransactionProvider from './useTransactionProvider'
 
 const useTokenBalance = (tokenAddress: string) => {
   const [balance, setBalance] = useState(new BigNumber(0))
-  const { account, library } = useWeb3React()
+  const { account } = useWeb3React()
   const bao = useBao()
   const { transactions } = useTransactionProvider()
 
@@ -18,15 +17,15 @@ const useTokenBalance = (tokenAddress: string) => {
       return setBalance(new BigNumber(ethBalance))
     }
 
-    const balance = await getBalance(library, tokenAddress, account)
+    const balance = await getBalance(bao, tokenAddress, account)
     setBalance(new BigNumber(balance))
-  }, [transactions, account, library, tokenAddress])
+  }, [transactions, account, bao, tokenAddress])
 
   useEffect(() => {
-    if (account && library && tokenAddress) {
+    if (account && bao && tokenAddress) {
       fetchBalance()
     }
-  }, [transactions, account, library, setBalance, tokenAddress])
+  }, [transactions, account, bao, setBalance, tokenAddress])
 
   return balance
 }

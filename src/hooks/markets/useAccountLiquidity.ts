@@ -10,6 +10,7 @@ import { useBorrowBalances, useSupplyBalances } from './useBalances'
 import { useExchangeRates } from './useExchangeRates'
 import { useMarkets } from './useMarkets'
 import { useMarketPrices } from './usePrices'
+import useBlock from 'hooks/base/useBlock'
 
 export type AccountLiquidity = {
   netApy: number
@@ -24,6 +25,7 @@ export const useAccountLiquidity = (): AccountLiquidity => {
   >()
 
   const { transactions } = useTransactionProvider()
+  const block = useBlock()
   const bao = useBao()
   const { account } = useWeb3React()
   const markets = useMarkets()
@@ -138,6 +140,7 @@ export const useAccountLiquidity = (): AccountLiquidity => {
     borrowBalances,
     exchangeRates,
     oraclePrices,
+    block,
   ])
 
   return accountLiquidity

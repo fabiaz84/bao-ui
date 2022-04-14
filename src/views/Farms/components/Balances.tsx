@@ -47,7 +47,14 @@ const PendingRewards: React.FC = () => {
 	}, [sumEarning])
 
 	return (
-		<span>
+		<span
+			style={{
+				transform: `scale(${scale})`,
+				transformOrigin: 'right bottom',
+				transition: 'transform 0.5s',
+				display: 'inline-block',
+			}}
+		>
 			<CountUp
 				start={start}
 				end={end}
@@ -122,28 +129,30 @@ const Balances: React.FC = () => {
 							<StatWrapper>
 								<UserStat>
 									<h1>Your BAO Balance</h1>
-									<p>{account ? getDisplayBalance(baoBalance) : 'Locked'} </p>
+									<p>{account ? getDisplayBalance(baoBalance) : '-'} </p>
 								</UserStat>
 							</StatWrapper>
 							<StatWrapper>
 								<UserStat>
 									<h1>Your Locked BAO</h1>
-									<p>{account ? getDisplayBalance(locks) : 'Locked'} </p>
+									<p>{account ? getDisplayBalance(locks) : '-'} </p>
 								</UserStat>
 							</StatWrapper>
 							<StatWrapper>
 								<UserStat>
 									<h1>Pending Harvest</h1>
-									<p>
-										<PendingRewards />
-									</p>
+									<p>{account ? <PendingRewards /> : '-'}</p>
 								</UserStat>
 							</StatWrapper>
 							<StatWrapper>
 								<UserStat>
 									<h1>Total BAO Supply</h1>
 									<p>
-										{totalSupply ? getDisplayBalance(totalSupply) : 'Locked'}
+										{totalSupply ? (
+											getDisplayBalance(totalSupply)
+										) : (
+											<SpinnerLoader />
+										)}
 									</p>
 								</UserStat>
 							</StatWrapper>
@@ -189,7 +198,7 @@ export const UserStatsWrapper = styled(Col)`
 `
 
 export const StatWrapper = styled(Col)`
-	background-color: ${(props) => props.theme.color.primary[100]};
+	background-color: ${(props) => props.theme.color.primary[200]};
 	margin: 0.5rem 0.5rem;
 	border-radius: 8px;
 	position: relative;

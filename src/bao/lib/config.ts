@@ -17,6 +17,7 @@ export default {
     uniswapFactory: '0xc35DADB65012eC5796536bD9864eD8773aBc74C4',
     uniswapFactoryV2: '0xc35DADB65012eC5796536bD9864eD8773aBc74C4',
     lendingLogicKashi: '0xcBA495A74e23D5B42853e41334e26DDd322Af082',
+    DAI: '0xf80A32A835F79D7787E8a8ee5721D0fEaFd78108',
     baoUSD: '0x7945b0A6674b175695e5d1D08aE1e6F13744Abb0',
     WETH: '0xc778417E063141139Fce010982780140Aa0cD5Ab',
     DEAD: '0x000000000000000000000000000000000000dead',
@@ -74,7 +75,7 @@ export default {
     },
     stabilizer: {
       3: {
-        address: '0x7791528449CF1A9CEc3dE2F9ac9D915ccFD9A8d7',
+        address: '0x598D87CA75a9C764A8d1006018ff3c1b72EC816E',
         abi: 'stabilizer.json',
       },
     },
