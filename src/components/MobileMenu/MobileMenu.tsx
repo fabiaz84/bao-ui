@@ -36,6 +36,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
 					>
 						Farms
 					</StyledLink>
+					<StyledLink
+						exact
+						activeClassName="active"
+						to="/NFT"
+						onClick={onDismiss}
+					>
+						NFT
+					</StyledLink>
 					<StyledAbsoluteLink
 						href="https://snapshot.page/#/baovotes.eth"
 						target="_blank"
