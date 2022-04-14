@@ -110,7 +110,7 @@ const StyledMobileMenu = styled.div`
 	padding-top: 100px;
 	padding-bottom: 100px;
 	overflow-y: scroll;
-	border: ${(props) => props.theme.border.default};
+	border: none;
 `
 
 const StyledLink = styled(NavLink)`

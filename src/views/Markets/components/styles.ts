@@ -212,7 +212,7 @@ export const BorrowMeterContainer = styled.div`
   width: 100%;
   height: 0.25rem;
   border-radius: 8px;
-  background-color: ${(props) => props.theme.color.transparent[100]};
+  background-color: ${(props) => props.theme.color.primary[100]};
 `
 
 export const BorrowMeter = styled.div`

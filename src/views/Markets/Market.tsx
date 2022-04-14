@@ -302,7 +302,7 @@ const InfoContainer = styled.div`
 	border-radius: 8px;
 	font-size: ${(props) => props.theme.fontSize.sm};
 	color: ${(props) => props.theme.color.text[200]};
-	border: ${(props) => props.theme.border.default};
+	border: none;
 	padding: 25px 50px;
 	margin-bottom: 1rem;
 
