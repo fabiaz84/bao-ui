@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import Footer from '../Footer'
-import overlay from 'assets/img/background_overlay.png'
 
 const Page: React.FC = ({ children }) => (
 	<StyledPageContainer>
@@ -13,13 +12,13 @@ const Page: React.FC = ({ children }) => (
 )
 
 const StyledPageContainer = styled.div`
-	background-image: url(${overlay});
+	background-image: ${(props) => props.theme.backgroundOverlay.default};
 	display: table;
 	position: absolute;
 	top: ${(props) => props.theme.topBarSize}px;
 	left: 0;
 	height: calc(100vh - ${(props) => props.theme.topBarSize}px);
-	width: 100%;
+	width: 100%; ;
 `
 
 const StyledPageWrapper = styled.div`

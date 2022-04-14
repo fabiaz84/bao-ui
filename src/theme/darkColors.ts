@@ -20,11 +20,11 @@ export const green = '#008000'
 export const blue = '#0000f0'
 
 export const primary = {
-  100: '#642828',
-  200: '#803434',
-  300: '#625F65',
-  400: '#78767b',
-  500: '#8f8d91',
+  100: '#210e0e',
+  200: '#391818',
+  300: '#481e1e',
+  400: '#562424',
+  500: '#622a2a',
 }
 
 export const secondary = {

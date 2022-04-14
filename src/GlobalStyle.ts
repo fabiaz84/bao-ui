@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background: ${(props: any) => props.theme.backgroundGradient};
+    background: ${(props: any) => props.theme.backgroundGradient.default};
     margin: 0;
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
@@ -57,23 +57,25 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .tooltip > .tooltip-inner {
-    background-color: #181524;
+    background-color: ${(props) => props.theme.color.primary[200]};
+    color: ${(props) => props.theme.color.text[100]};
+    font-weight: ${(props) => props.theme.fontWeight.medium};
   }
 
   .tooltip.bs-tooltip-left > .tooltip-arrow::before {
-    border-left-color: #181524;
+    border-left-color: ${(props) => props.theme.color.primary[300]};
   }
 
   .tooltip.bs-tooltip-right > .tooltip-arrow::before {
-    border-right-color: #181524;
+    border-right-color: ${(props) => props.theme.color.primary[300]};
   }
 
   .tooltip.bs-tooltip-top > .tooltip-arrow::before {
-    border-top-color: #181524;
+    border-top-color: ${(props) => props.theme.color.primary[300]};
   }
 
   .tooltip.bs-tooltip-bottom > .tooltip-arrow::before {
-    border-bottom-color: #181524;
+    border-bottom-color: ${(props) => props.theme.color.primary[300]};
   }
 
   ::selection {
@@ -98,6 +100,10 @@ const GlobalStyle = createGlobalStyle`
     border: none;
   }
 
+  .modal {
+    backdrop-filter: blur(6px);
+  }
+  
   .modal-content {
     background-color: ${(props: any) =>
       props.theme.color.primary[100]} !important;

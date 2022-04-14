@@ -210,7 +210,7 @@ export const UserStatsWrapper = styled(Col)`
 `
 
 export const StatWrapper = styled(Col)`
-	background-color: ${(props) => props.theme.color.transparent[200]};
+	background-color: ${(props) => props.theme.color.primary[100]};
 	margin: 0.5rem 0.5rem;
 	border-radius: 8px;
 	position: relative;
@@ -218,7 +218,7 @@ export const StatWrapper = styled(Col)`
 	padding-inline-start: 1rem;
 	padding-inline-end: 1rem;
 	padding: 1.25rem 16px;
-	border: none;
+	border: ${(props) => props.theme.border.default};
 
 	@media (max-width: ${(props) => props.theme.breakpoints.lg}px) {
 		padding: 1rem 12px;
@@ -279,7 +279,7 @@ export const CircularProgressbarWrapper = styled.div`
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
-	background-color: ${(props) => props.theme.color.transparent[200]};
+	background-color: ${(props) => props.theme.color.primary[100]};
 	border-radius: 50%;
 
 	@media (max-width: ${(props) => props.theme.breakpoints.xl}px) {
@@ -338,7 +338,7 @@ const DebtLimitWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	width: 100%;
-	background-color: ${(props) => props.theme.color.transparent[200]};
+	background-color: ${(props) => props.theme.color.primary[100]};
 	border-radius: 8px;
 	margin-top: 1rem;
 	padding: 1rem;

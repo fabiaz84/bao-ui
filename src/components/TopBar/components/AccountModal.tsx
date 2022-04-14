@@ -120,7 +120,7 @@ const AccountModal = ({ onHide, show }: ModalProps) => {
 									.slice(0, 5)
 									.map((txHash) => (
 										<StatText>
-											<p>
+											<MaxLabel>
 												{transactions[txHash].receipt ? (
 													<FontAwesomeIcon
 														icon="check"
@@ -131,10 +131,10 @@ const AccountModal = ({ onHide, show }: ModalProps) => {
 												) : (
 													<SpinnerLoader />
 												)}
-											</p>
-											<p style={{ textAlign: 'end' }}>
+											</MaxLabel>
+											<MaxLabel style={{ textAlign: 'end' }}>
 												{transactions[txHash].description}
-											</p>
+											</MaxLabel>
 										</StatText>
 									))}
 							</>

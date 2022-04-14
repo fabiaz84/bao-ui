@@ -198,7 +198,7 @@ export const UserStatsWrapper = styled(Col)`
 `
 
 export const StatWrapper = styled(Col)`
-	background-color: ${(props) => props.theme.color.primary[100]};
+	background-color: ${(props) => props.theme.color.primary[200]};
 	margin: 0.5rem 0.5rem;
 	border-radius: 8px;
 	position: relative;

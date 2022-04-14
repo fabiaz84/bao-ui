@@ -508,30 +508,25 @@ const StyledAccordionHeader = styled(Accordion.Header)`
 	}
 
 	> button {
-		background-color: ${(props) => props.theme.color.transparent[100]};
+		background-color: ${(props) => props.theme.color.primary[100]};
 		color: ${(props) => props.theme.color.text[100]};
 		padding: 1.25rem;
-		border: none;
+		border: ${(props) => props.theme.border.default};
 		border-radius: 8px;
 
 		&:hover,
 		&:focus,
 		&:active,
 		&:not(.collapsed) {
-			background-color: ${(props) => props.theme.color.transparent[200]};
+			background-color: ${(props) => props.theme.color.primary[200]};
 			color: ${(props) => props.theme.color.text[100]};
-			border: none;
+			border: ${(props) => props.theme.border.default};
 			box-shadow: none;
 			border-radius: 8px 8px 0px 0px;
 		}
 
 		&:not(.collapsed) {
 			transition: none;
-
-			&:focus,
-			&:active {
-				border-color: ${(props) => props.theme.color.transparent[300]};
-			}
 
 			::after {
 				background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='${(
@@ -576,10 +571,10 @@ const StyledAccordionItem = styled(Accordion.Item)`
 `
 
 const StyledAccordionBody = styled(Accordion.Body)`
-	background-color: ${(props) => props.theme.color.transparent[100]};
+	background-color: ${(props) => props.theme.color.primary[100]};
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
-	border: none;
+	border: ${(props) => props.theme.border.default};
 	border-top: none;
 `
 
@@ -617,7 +612,7 @@ const OfflineAccordionHeader = styled.div`
 		background: ${(props) => props.theme.color.transparent[100]};
 		color: ${(props) => props.theme.color.text[100]};
 		padding: 1.25rem;
-		border: none;
+		border: ${(props) => props.theme.border.default};
 		border-radius: 8px;
 
 		&:hover,
@@ -625,7 +620,6 @@ const OfflineAccordionHeader = styled.div`
 		&:active {
 			background: ${(props) => props.theme.color.transparent[200]};
 			color: ${(props) => props.theme.color.text[100]};
-			border: none;
 			box-shadow: none;
 		}
 		
