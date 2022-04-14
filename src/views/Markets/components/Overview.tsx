@@ -4,14 +4,13 @@ import Tooltipped from 'components/Tooltipped'
 import { useAccountLiquidity } from 'hooks/markets/useAccountLiquidity'
 import useHealthFactor from 'hooks/markets/useHealthFactor'
 import React from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col, Row } from 'react-bootstrap'
 import {
 	buildStyles,
 	CircularProgressbarWithChildren,
 } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 import styled from 'styled-components'
-import { black } from 'theme/lightColors'
 import { getDisplayBalance } from 'utils/numberFormat'
 
 export const Overview = () => {

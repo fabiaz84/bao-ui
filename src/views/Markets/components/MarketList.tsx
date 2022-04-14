@@ -12,13 +12,13 @@ import useBao from 'hooks/base/useBao'
 import useTransactionHandler from 'hooks/base/useTransactionHandler'
 import {
 	AccountLiquidity,
-	useAccountLiquidity
+	useAccountLiquidity,
 } from 'hooks/markets/useAccountLiquidity'
 import {
 	Balance,
 	useAccountBalances,
 	useBorrowBalances,
-	useSupplyBalances
+	useSupplyBalances,
 } from 'hooks/markets/useBalances'
 import { useExchangeRates } from 'hooks/markets/useExchangeRates'
 import { useAccountMarkets } from 'hooks/markets/useMarkets'
@@ -29,7 +29,7 @@ import {
 	Col,
 	Container,
 	FormCheck,
-	Row
+	Row,
 } from 'react-bootstrap'
 import styled from 'styled-components'
 import { decimate, getDisplayBalance } from 'utils/numberFormat'

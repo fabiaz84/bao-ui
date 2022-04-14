@@ -288,8 +288,8 @@ export const MaxLabel = styled.p`
   margin-bottom: 0px;
 
   @media (max-width: ${(props) => props.theme.breakpoints.lg}px) {
-		font-size: 0.75rem;
-	}
+    font-size: 0.75rem;
+  }
 `
 
 export const AssetLabel = styled.p`
@@ -300,8 +300,8 @@ export const AssetLabel = styled.p`
   margin-bottom: 0px;
 
   @media (max-width: ${(props) => props.theme.breakpoints.lg}px) {
-		font-size: 0.75rem;
-	}
+    font-size: 0.75rem;
+  }
 `
 
 export const AssetStack = styled.div`

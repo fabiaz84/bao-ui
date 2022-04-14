@@ -338,8 +338,8 @@ const StatWrapper = styled.div`
 	border-radius: 8px;
 
 	@media (max-width: ${(props) => props.theme.breakpoints.lg}px) {
-		padding: 15px 30px;	
-		}
+		padding: 15px 30px;
+	}
 `
 
 const StatHeader = styled.div`

@@ -9,8 +9,8 @@ import { Bao } from './Bao'
 import Config from './lib/config'
 import { MerkleTree } from 'merkletreejs'
 import keccak256 from 'keccak256'
-import WhitelistAddresses from 'views/NFT/whitelist/whitelistAddresses.json'
-import WhitelistAddresses1 from 'views/NFT/whitelist/whitelistAddresses1.json'
+import baoElderWL from 'views/NFT/components/baoElderWL.json'
+import baoSwapWL from 'views/NFT/components/baoSwapWL.json'
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
@@ -415,7 +415,7 @@ export const mintElder = async (
   nftContract: Contract,
   account: string,
 ): Promise<string> => {
-  const leafNodes = WhitelistAddresses.addresses.map((address: string) =>
+  const leafNodes = baoElderWL.addresses.map((address: string) =>
     keccak256(address),
   )
   const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true })
@@ -438,15 +438,12 @@ export const mintBaoSwap = async (
   nftContract: Contract,
   account: string,
 ): Promise<string> => {
-  const leafNodes = WhitelistAddresses1.addresses.map((address: string) =>
+  const leafNodes = baoSwapWL.addresses.map((address: string) =>
     keccak256(address),
   )
   const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true })
   const leaf = keccak256(account)
   const hexProof = merkleTree.getHexProof(leaf)
-
-  console.log('account\n', account.toString())
-  console.log('Whitelist proof\n', hexProof.toString())
 
   return nftContract.methods
     .mintBaoGWithSignature(hexProof)

@@ -14,9 +14,9 @@ import {
 } from 'hooks/nft/useMint'
 import React from 'react'
 import { Card, Container } from 'react-bootstrap'
+import { addresses as elderAddresses } from './components/baoElderWL.json'
+import { addresses as baoSwapAddresses } from './components/baoSwapWL.json'
 import { StyledInfo, StyledWrapper } from './components/styles'
-import { addresses as elderAddresses } from './whitelist/whitelistAddresses.json'
-import { addresses as baoSwapAddresses } from './whitelist/whitelistAddresses1.json'
 
 const NFT: React.FC = () => {
 	const { account } = useWeb3React()

@@ -34,23 +34,15 @@ export const FarmModal: React.FC<FarmModalProps> = ({ farm, show, onHide }) => {
 	const { pid } = farm
 	const [val, setVal] = useState<string>('')
 	const bao = useBao()
-	const { library } = useWeb3React()
 
 	const lpTokenAddress = farm.lpTokenAddress
 
 	const lpContract = useMemo(() => {
 		return getContract(bao, lpTokenAddress)
-	}, [library, lpTokenAddress])
+	}, [bao, lpTokenAddress])
 
 	const tokenBalance = useTokenBalance(lpContract.options.address)
 	const stakedBalance = useStakedBalance(pid)
-
-	const handleChange = useCallback(
-		(e: React.FormEvent<HTMLInputElement>) => {
-			if (e.currentTarget.value.length < 20) setVal(e.currentTarget.value)
-		},
-		[setVal],
-	)
 
 	const hideModal = useCallback(() => {
 		onHide()

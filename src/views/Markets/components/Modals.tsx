@@ -8,7 +8,7 @@ import { useAccountLiquidity } from 'hooks/markets/useAccountLiquidity'
 import {
 	useAccountBalances,
 	useBorrowBalances,
-	useSupplyBalances
+	useSupplyBalances,
 } from 'hooks/markets/useBalances'
 import { useExchangeRates } from 'hooks/markets/useExchangeRates'
 import { useMarketPrices } from 'hooks/markets/usePrices'
@@ -20,8 +20,13 @@ import { MarketButton } from './MarketButton'
 import { MarketStats } from './Stats'
 import {
 	AssetLabel,
-	AssetStack, CloseButton, HeaderWrapper, IconFlex, LabelStack,
-	MaxLabel, ModalStack
+	AssetStack,
+	CloseButton,
+	HeaderWrapper,
+	IconFlex,
+	LabelStack,
+	MaxLabel,
+	ModalStack,
 } from './styles'
 
 export enum MarketOperations {

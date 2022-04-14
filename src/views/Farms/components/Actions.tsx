@@ -11,10 +11,8 @@ import TokenInput from 'components/TokenInput'
 import { PoolType } from 'contexts/Farms/types'
 import { ethers } from 'ethers'
 import useAllowance from 'hooks/base/useAllowance'
-import useApprove from 'hooks/base/useApprove'
 import useBao from 'hooks/base/useBao'
 import useBlockDiff from 'hooks/base/useBlockDiff'
-import useTokenBalance from 'hooks/base/useTokenBalance'
 import useTransactionHandler from 'hooks/base/useTransactionHandler'
 import useEarnings from 'hooks/farms/useEarnings'
 import useFees from 'hooks/farms/useFees'
@@ -146,12 +144,6 @@ const BalanceValue = styled.div`
 	font-size: 24px;
 	font-weight: 700;
 `
-
-interface FarmListItemProps {
-	farm: FarmWithStakedValue
-	operation: string
-}
-
 interface StakeProps {
 	lpContract: Contract
 	lpTokenAddress: string
@@ -182,8 +174,6 @@ export const Stake: React.FC<StakeProps> = ({
 		return getFullDisplayBalance(max)
 	}, [max])
 
-	const walletBalance = useTokenBalance(lpTokenAddress)
-
 	const handleChange = useCallback(
 		(e: React.FormEvent<HTMLInputElement>) => {
 			setVal(e.currentTarget.value)
@@ -204,23 +194,7 @@ export const Stake: React.FC<StakeProps> = ({
 		)
 	}, [fullBalance, setVal])
 
-	const [requestedApproval, setRequestedApproval] = useState(false)
-
 	const allowance = useAllowance(lpContract)
-	const { onApprove } = useApprove(lpContract)
-
-	const handleApprove = useCallback(async () => {
-		try {
-			setRequestedApproval(true)
-			const txHash = await onApprove()
-			// user rejected tx or didn't go thru
-			if (!txHash) {
-				setRequestedApproval(false)
-			}
-		} catch (e) {
-			console.log(e)
-		}
-	}, [onApprove, setRequestedApproval])
 
 	const masterChefContract = getMasterChefContract(bao)
 
@@ -291,7 +265,6 @@ export const Stake: React.FC<StakeProps> = ({
 								</SubmitButton>
 							) : (
 								<SubmitButton
-									disabled={requestedApproval}
 									onClick={async () => {
 										handleTx(
 											approvev2(lpContract, masterChefContract, account),
