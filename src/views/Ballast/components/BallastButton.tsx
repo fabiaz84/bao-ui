@@ -82,12 +82,12 @@ const BallastButton: React.FC<BallastButtonProps> = ({
 
 		if (pendingTx) {
 			return typeof pendingTx === 'string' ? (
-				<ExternalLink
+				<a
 					href={`${Config.defaultRpc.blockExplorerUrls}/tx/${pendingTx}`}
 					target="_blank"
 				>
 					Pending Transaction <FontAwesomeIcon icon="external-link-alt" />
-				</ExternalLink>
+				</a>
 			) : (
 				'Pending Transaction'
 			)

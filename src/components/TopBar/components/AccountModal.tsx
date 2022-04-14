@@ -94,22 +94,21 @@ const AccountModal = ({ onHide, show }: ModalProps) => {
 							</span>
 							{Object.keys(transactions).length > 0 && (
 								<small>
-									<span>
-										<a
-											href="#"
-											style={{ float: 'right', verticalAlign: 'middle' }}
-											onClick={() => {
-												localStorage.setItem('transactions', '{}')
-												window.location.reload()
-											}}
-										>
+									<ClearButton
+										onClick={() => {
+											localStorage.setItem('transactions', '{}')
+											window.location.reload()
+										}}
+									>
+										{' '}
+										<span>
 											<FontAwesomeIcon
 												icon="times"
 												style={{ verticalAlign: 'middle' }}
 											/>{' '}
 											Clear
-										</a>
-									</span>
+										</span>
+									</ClearButton>
 								</small>
 							)}
 						</span>
@@ -259,6 +258,19 @@ const StatText = styled.div`
 		margin-top: 0px;
 		margin-inline: 0.5rem 0px;
 		margin-bottom: 0px;
+	}
+`
+
+const ClearButton = styled.button`
+	float: right;
+	vertical-align: middle;
+	background-color: ${(props) => props.theme.color.primary[400]} !important;
+	border-radius: 8px;
+	border: none;
+	color: ${(props) => props.theme.color.text[100]};
+
+	&:hover {
+		background-color: ${(props) => props.theme.color.primary[500]} !important;
 	}
 `
 
