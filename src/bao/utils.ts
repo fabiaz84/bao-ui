@@ -2,7 +2,6 @@ import BigNumber from 'bignumber.js'
 import { ethers } from 'ethers'
 import _ from 'lodash'
 import { Contract } from 'web3-eth-contract'
-import { Farm } from 'contexts/Farms'
 import Multicall from 'utils/multicall'
 import { decimate, exponentiate } from 'utils/numberFormat'
 import { Bao } from './Bao'
@@ -41,7 +40,7 @@ export const getElderContract = (bao: Bao): Contract => {
   return bao && bao.contracts && bao.getContract('nft')
 }
 
-export const getBaoSwapNFTContract = (bao: Bao): Contract => {
+export const getBaoSwapContract = (bao: Bao): Contract => {
   return bao && bao.contracts && bao.getContract('nft2')
 }
 
