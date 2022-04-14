@@ -14,8 +14,11 @@ import { useUserFarmInfo } from 'hooks/farms/useUserFarmInfo'
 import React, { useCallback, useMemo, useState } from 'react'
 import { Modal, ModalProps, Row } from 'react-bootstrap'
 import { getContract } from 'utils/erc20'
-import { CloseButton, HeaderWrapper, ModalStack } from 'views/Markets/components/styles'
-import { provider } from 'web3-core'
+import {
+	CloseButton,
+	HeaderWrapper,
+	ModalStack,
+} from 'views/Markets/components/styles'
 import { Rewards, Stake, Unstake } from './Actions'
 import { FarmIcon, FarmIconContainer, FarmWithStakedValue } from './FarmList'
 
@@ -31,12 +34,12 @@ export const FarmModal: React.FC<FarmModalProps> = ({ farm, show, onHide }) => {
 	const { pid } = farm
 	const [val, setVal] = useState<string>('')
 	const bao = useBao()
-	const { account, library } = useWeb3React()
+	const { library } = useWeb3React()
 
 	const lpTokenAddress = farm.lpTokenAddress
 
 	const lpContract = useMemo(() => {
-		return getContract(library as provider, lpTokenAddress)
+		return getContract(bao, lpTokenAddress)
 	}, [library, lpTokenAddress])
 
 	const tokenBalance = useTokenBalance(lpContract.options.address)
@@ -79,11 +82,11 @@ export const FarmModal: React.FC<FarmModalProps> = ({ farm, show, onHide }) => {
 				</Modal.Title>
 			</Modal.Header>
 			<ModalStack>
-			<NavButtons
-				options={operations}
-				active={operation}
-				onClick={setOperation}
-			/>
+				<NavButtons
+					options={operations}
+					active={operation}
+					onClick={setOperation}
+				/>
 			</ModalStack>
 			{operation === 'Stake' && (
 				<Stake

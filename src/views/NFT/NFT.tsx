@@ -7,10 +7,10 @@ import Page from 'components/Page'
 import PageHeader from 'components/PageHeader'
 import Spacer from 'components/Spacer'
 import {
-	useBaoSwapMint,
-	useElderMint,
-	useElderClaimedCheck,
 	useBaoSwapClaimedCheck,
+	useBaoSwapMint,
+	useElderClaimedCheck,
+	useElderMint,
 } from 'hooks/nft/useMint'
 import React from 'react'
 import { Card, Container } from 'react-bootstrap'
@@ -55,7 +55,9 @@ const NFT: React.FC = () => {
 							<img src={baoElder} width={320} height={300} alt="" />
 						</Card.Body>
 						<Card.Footer>
-							{typeof account === 'string' ? (
+							{!account ? (
+								<Button text="Claim" disabled={true} onClick={onMintElder} />
+							) : typeof account === 'string' ? (
 								elderAddresses.includes(account.toLowerCase()) ? (
 									!isElderClaimed ? (
 										<Button text="Claim" onClick={onMintElder} />
@@ -91,7 +93,9 @@ const NFT: React.FC = () => {
 							<img src={baoSwap} width={320} height={300} alt="" />
 						</Card.Body>
 						<Card.Footer>
-							{typeof account === 'string' ? (
+							{!account ? (
+								<Button text="Claim" disabled={true} onClick={onMintBaoSwap} />
+							) : typeof account === 'string' ? (
 								baoSwapAddresses.includes(account.toLowerCase()) ? (
 									!isBaoSwapClaimed ? (
 										<Button text="Claim" onClick={onMintBaoSwap} />

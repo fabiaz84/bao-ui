@@ -5,7 +5,7 @@ import useBao from '../base/useBao'
 
 export const useUserFarmInfo = (pid: number) => {
   const [userInfo, setUserInfo] = useState<any | undefined>()
-  const { account, library } = useWeb3React()
+  const { account } = useWeb3React()
   const bao = useBao()
 
   const fetchUserInfo = useCallback(async () => {
@@ -15,11 +15,11 @@ export const useUserFarmInfo = (pid: number) => {
       account,
     )
     setUserInfo(_userInfo)
-  }, [bao, library])
+  }, [bao, account])
 
   useEffect(() => {
     fetchUserInfo()
-  }, [bao, library])
+  }, [bao, account])
 
   return userInfo
 }

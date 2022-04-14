@@ -26,7 +26,7 @@ export interface FarmWithStakedValue extends Farm {
 export const FarmList: React.FC = () => {
 	const bao = useBao()
 	const [farms] = useFarms()
-	const farmsTVL = useAllFarmTVL(bao && bao.web3, bao && bao.multicall)
+	const farmsTVL = useAllFarmTVL(bao, bao && bao.multicall)
 	const { account, library } = useWeb3React()
 
 	const [baoPrice, setBaoPrice] = useState<BigNumber | undefined>()

@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useWeb3React } from '@web3-react/core'
 import Config from 'bao/lib/config'
 import { approvev2 } from 'bao/utils'
 import BigNumber from 'bignumber.js'
@@ -9,7 +10,6 @@ import useAllowancev2 from 'hooks/base/useAllowancev2'
 import useBao from 'hooks/base/useBao'
 import useTransactionHandler from 'hooks/base/useTransactionHandler'
 import React, { useMemo } from 'react'
-import { useWeb3React } from '@web3-react/core'
 import { decimate, exponentiate } from 'utils/numberFormat'
 
 const BallastButton: React.FC<BallastButtonProps> = ({
@@ -26,12 +26,10 @@ const BallastButton: React.FC<BallastButtonProps> = ({
 	const inputAApproval = useAllowancev2(
 		Config.addressMap.DAI,
 		Config.contracts.stabilizer[Config.networkId].address,
-		[pendingTx],
 	)
 	const inputBApproval = useAllowancev2(
 		Config.addressMap.baoUSD,
 		Config.contracts.stabilizer[Config.networkId].address,
-		[pendingTx],
 	)
 
 	const handleClick = async () => {

@@ -11,7 +11,3 @@ const account = "0xb9ab9578a34a05c86124c399735fdE44dEc80E7F"
 
 const claimingAccount = keccak256(account);
 const hexProof = tree.getHexProof(claimingAccount);
-
-console.log('Whitelist Merkletree\n', tree.toString());
-console.log('Whitelist Hash\n', root);
-console.log('Whitelist proof\n', hexProof.toString());

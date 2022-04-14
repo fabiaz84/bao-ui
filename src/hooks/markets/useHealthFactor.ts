@@ -1,4 +1,6 @@
 import BigNumber from 'bignumber.js'
+import useBlock from 'hooks/base/useBlock'
+import useTransactionProvider from 'hooks/base/useTransactionProvider'
 import { useCallback, useEffect, useState } from 'react'
 import { useAccountLiquidity } from './useAccountLiquidity'
 import { useAccountMarkets } from './useMarkets'
@@ -7,6 +9,8 @@ const useHealthFactor = () => {
   const [healthFactor, setHealthFactor] = useState<BigNumber | undefined>()
   const markets = useAccountMarkets()
   const accountLiquidity = useAccountLiquidity()
+  const { transactions } = useTransactionProvider()
+  const block = useBlock()
 
   const fetchHealthFactor = useCallback(async () => {
     const { usdSupply, usdBorrow } = accountLiquidity
@@ -25,7 +29,7 @@ const useHealthFactor = () => {
     if (!(markets && accountLiquidity)) return
 
     fetchHealthFactor()
-  }, [markets, accountLiquidity])
+  }, [markets, accountLiquidity, transactions, block])
 
   return healthFactor
 }

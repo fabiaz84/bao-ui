@@ -1,8 +1,15 @@
 import { useWeb3React } from '@web3-react/core'
-import { useCallback, useEffect, useState } from 'react'
-import { getElderContract, getNFTWhitelistClaimed, mintElder } from 'bao/utils'
-import { getBaoSwapNFTContract, mintBaoSwap } from 'bao/utils'
+import {
+  getBaoSwapNFTContract,
+  getElderContract,
+  getNFTWhitelistClaimed,
+  mintBaoSwap,
+  mintElder
+} from 'bao/utils'
 import useBao from 'hooks/base/useBao'
+import useBlock from 'hooks/base/useBlock'
+import useTransactionProvider from 'hooks/base/useTransactionProvider'
+import { useCallback, useEffect, useState } from 'react'
 
 export const useElderMint = () => {
   const { account } = useWeb3React()
@@ -32,8 +39,10 @@ export const useBaoSwapMint = () => {
 
 export const useElderClaimedCheck = () => {
   const [isClaimed, setIsClaimed] = useState<any | undefined>()
-  const { account, library } = useWeb3React()
+  const { account } = useWeb3React()
   const bao = useBao()
+  const block = useBlock()
+  const { transactions } = useTransactionProvider()
 
   const fetchWhitelistClaimed = useCallback(async () => {
     const _isClaimed = await getNFTWhitelistClaimed(
@@ -41,19 +50,23 @@ export const useElderClaimedCheck = () => {
       account,
     )
     setIsClaimed(_isClaimed)
-  }, [bao, library])
+  }, [bao, account])
 
   useEffect(() => {
-    fetchWhitelistClaimed()
-  }, [bao, library])
+    if (account && bao) {
+      fetchWhitelistClaimed()
+    }
+  }, [bao, account, block, transactions])
 
   return isClaimed
 }
 
 export const useBaoSwapClaimedCheck = () => {
   const [isClaimed, setIsClaimed] = useState<any | undefined>()
-  const { account, library } = useWeb3React()
+  const { account } = useWeb3React()
   const bao = useBao()
+  const block = useBlock()
+  const { transactions } = useTransactionProvider()
 
   const fetchWhitelistClaimed = useCallback(async () => {
     const _isClaimed = await getNFTWhitelistClaimed(
@@ -61,11 +74,13 @@ export const useBaoSwapClaimedCheck = () => {
       account,
     )
     setIsClaimed(_isClaimed)
-  }, [bao, library])
+  }, [bao, account])
 
   useEffect(() => {
-    fetchWhitelistClaimed()
-  }, [bao, library])
+    if (account && bao) {
+      fetchWhitelistClaimed()
+    }
+  }, [bao, account, block, transactions])
 
   return isClaimed
 }

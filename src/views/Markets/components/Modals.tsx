@@ -1,35 +1,28 @@
-import React, { useCallback, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ActiveSupportedMarket } from 'bao/lib/types'
+import BigNumber from 'bignumber.js'
 import { NavButtons } from 'components/Button'
 import { BalanceInput } from 'components/Input'
-import { Col, Modal, ModalProps, Row } from 'react-bootstrap'
+import useBao from 'hooks/base/useBao'
+import { useAccountLiquidity } from 'hooks/markets/useAccountLiquidity'
 import {
 	useAccountBalances,
 	useBorrowBalances,
-	useSupplyBalances,
+	useSupplyBalances
 } from 'hooks/markets/useBalances'
-import { useAccountLiquidity } from 'hooks/markets/useAccountLiquidity'
 import { useExchangeRates } from 'hooks/markets/useExchangeRates'
-import useBao from 'hooks/base/useBao'
-import BigNumber from 'bignumber.js'
+import { useMarketPrices } from 'hooks/markets/usePrices'
+import React, { useCallback, useState } from 'react'
+import { Col, Modal, ModalProps, Row } from 'react-bootstrap'
+import styled from 'styled-components'
+import { decimate, exponentiate } from 'utils/numberFormat'
 import { MarketButton } from './MarketButton'
 import { MarketStats } from './Stats'
-import { decimate, exponentiate } from 'utils/numberFormat'
 import {
-	HeaderWrapper,
-	ModalStack,
-	InputStack,
-	LabelFlex,
-	LabelStack,
-	MaxLabel,
 	AssetLabel,
-	AssetStack,
-	IconFlex,
-	CloseButton,
+	AssetStack, CloseButton, HeaderWrapper, IconFlex, LabelStack,
+	MaxLabel, ModalStack
 } from './styles'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useMarketPrices } from 'hooks/markets/usePrices'
-import styled from 'styled-components'
 
 export enum MarketOperations {
 	supply = 'Supply',
@@ -139,7 +132,7 @@ const MarketModal = ({
 	return (
 		<>
 			<Modal show={show} onHide={hideModal} centered>
-				<CloseButton onClick={onHide}>
+				<CloseButton onClick={hideModal}>
 					<FontAwesomeIcon icon="times" />
 				</CloseButton>
 				<Modal.Header>
@@ -210,6 +203,7 @@ const MarketModal = ({
 						isDisabled={
 							!val || !bao || isNaN(val as any) || parseFloat(val) > max()
 						}
+						onHide={hideModal}
 					/>
 				</Modal.Footer>
 			</Modal>
